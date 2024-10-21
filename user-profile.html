@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - CampusNest</title>
+    <link rel="stylesheet" href="user-profile.css">
+</head>
+<body>
+    <header>
+        <h1>CampusNest</h1>
+        <div class="dropdown">
+            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div class="dropdown-content" id="dropdown-menu">
+                <a href="index.html">Home</a>
+                <a href="login.html">Log Out</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <form>
+            <div class="input-group">
+                <label for="username">Username (required)</label>
+                <input type="text" id="username" value = "gusTHEeagle" required>
+            </div>
+            <div class="input-group">
+                <label for="last-name">Last Name (required)</label>
+                <input type="text" id="last-name" required>
+            </div>
+            <div class="input-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name">
+            </div>
+            <div class="input-group">
+                <label for="preferred-name">Preferred First Name</label>
+                <input type="text" id="preferred-name">
+            </div>
+            <div class="input-group">
+                <label for="eagle-id">Eagle ID (required)</label>
+                <input type="text" id="eagle-id" value= "111111111" required disabled>
+            </div>
+            <div class="input-group">
+                <label for="classification">Classification (required)</label>
+                <select id="classification" required>
+                    <option value="" disabled selected>Select your classification</option>
+                    <option value="freshman">Freshman</option>
+                    <option value="sophomore">Sophomore</option>
+                    <option value="junior">Junior</option>
+                    <option value="senior">Senior</option>
+                    <option value="higher-ed">Higher Ed</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="major">Major (optional)</label>
+                <input type="text" id="major">
+            </div>
+            <div class="input-group">
+                <label for="email">Email (required)</label>
+                <input type="email" id="email" value="sydney.boles@example.com" required disabled>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone">
+            </div>
+            <div class="input-group">
+                <label for="preferred-contact">Preferred Contact Method (required)</label>
+                <select id="preferred-contact" required>
+                    <option value="email">Email</option>
+                    <option value="text">Text Message</option>
+                </select>
+            </div>
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        // Dropdown menu functionality
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const userName = dropdown.querySelector('.dropdown-toggle');
+            const dropdownMenu = dropdown.querySelector('.dropdown-content');
+
+            userName.onmouseover = () => {
+                dropdownMenu.classList.add('show');
+            };
+
+            userName.onmouseout = () => {
+                dropdownMenu.classList.remove('show');
+            };
+
+            dropdown.onmouseover = () => {
+                dropdownMenu.classList.add('show');
+            };
+
+            dropdown.onmouseout = () => {
+                dropdownMenu.classList.remove('show');
+            };
+        });
+    </script>
+</body>
+</html>

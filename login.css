@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #007bff; /* Blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height */
+}
+
+.login-container {
+    background-color: white; /* White background for the box */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Fixed width for the box */
+    text-align: center; /* Center text */
+    position: relative; /* Positioning for blur effect */
+}
+
+h1 {
+    margin-bottom: 20px; /* Space below the title */
+}
+
+.input-group {
+    margin-bottom: 15px; /* Space between input fields */
+    text-align: left; /* Align labels to the left */
+}
+
+.label {
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+input {
+    width: 100%; /* Full width input */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.login-button {
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    width: 100%; /* Full width */
+    transition: background 0.3s; /* Transition for hover effect */
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.links {
+    margin-top: 15px; /* Space above links */
+}
+
+.links a {
+    text-decoration: none; /* Remove underline */
+    color: #007bff; /* Link color */
+    display: block; /* Stack links */
+    margin: 5px 0; /* Space between links */
+}
+
+.links a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Loading overlay styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 5; /* Ensure it's above other elements */
+}
+
+.loading-spinner {
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* Blur effect for login container */
+.blur {
+    filter: blur(2px);
+}
