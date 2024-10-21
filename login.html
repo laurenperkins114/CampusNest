@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CampusNest</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container" id="login-container">
+        <h1>CampusNest</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+                <a href="#">Sign Up</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div>Loading...</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loginContainer = document.getElementById('login-container');
+    
+        form.onsubmit = (event) => {
+            event.preventDefault(); // Prevent immediate form submission
+            loadingOverlay.style.display = 'flex'; // Show loading overlay
+            loginContainer.classList.add('blur'); // Add blur effect to login container
+            setTimeout(() => {
+                window.location.href = 'index.html'; // Redirect after 3 seconds
+            }, 3000);
+        };
+    </script>
+    
+</body>
+</html>

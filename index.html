@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusNest</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CampusNest</h1>
+        <div class="dropdown">
+            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div class="dropdown-content" id="dropdown-menu">
+                <a href="user-profile.html">User Profile</a>
+                <a href="login.html">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <div id="calendar-tab">Calendar</div>
+            <div id="tasks-tab">Tasks</div>
+            <div id="files-tab">Files</div>
+            <div id="directory-tab">Member Directory</div>
+        </nav>
+
+        <div class="content" id="content-area">
+            <h2>Welcome</h2>
+            <p>Select a topic from the left to view its contents.</p>
+        </div>
+    </div>
+
+    <script>
+        // Dropdown menu functionality
+        const dropdown = document.getElementById('dropdown-menu');
+        const userName = document.getElementById('user-name');
+
+        userName.onmouseenter = () => {
+            dropdown.classList.add('show');
+        };
+
+        userName.onmouseleave = () => {
+            dropdown.classList.remove('show');
+        };
+
+        dropdown.onmouseenter = () => {
+            dropdown.classList.add('show');
+        };
+
+        dropdown.onmouseleave = () => {
+            dropdown.classList.remove('show');
+        };
+    </script>
+</body>
+</html>
