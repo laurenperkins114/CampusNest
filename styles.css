@@ -37,6 +37,7 @@ nav {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 nav div {
@@ -97,4 +98,90 @@ nav div:hover {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+/* Additional styles for calendar and events */
+.calendar-container {
+    display: flex; /* Aligns children side by side */
+}
+
+.calendar {
+    flex: 1; /* Takes available space */
+    margin-right: 20px; /* Space between calendar and event list */
+}
+
+.event-list {
+    width: 250px; /* Fixed width for event list */
+    background: white; /* Background color */
+    padding: 10px; /* Padding inside the event list */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow-y: auto; /* Allow vertical scrolling */
+    max-height: 400px; /* Max height for scrolling */
+}
+
+.day {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+.day:hover {
+    background-color: #e0e0e0;
+}
+
+.month-title {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for the days of the week */
+    gap: 5px; /* Space between cells */
+}
+
+.day-header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.empty-cell {
+    height: 40px; /* Height for empty cells */
+}
+
+.day {
+    height: 40px; /* Height for days */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd; /* Optional border */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.day:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.nav-buttons button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-buttons button:hover {
+    background-color: #0056b3;
 }
