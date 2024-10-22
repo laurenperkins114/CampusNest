@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusNest</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .event {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+            font-weight: bold;
+        }
+        .active {
+            background-color: #4caf50;
+            color: white;
+        }
+        .month-navigation {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .arrow-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -27,7 +54,8 @@
         </nav>
 
         <div class="content" id="content-area">
-            <h2>Welcome</h2>
+            <h2>Welcome to CampusNest!</h2>
+            <p class="welcome-message">Your one-stop platform for managing campus life. Explore our features to make the most of your experience.</p>
             <p>Select a topic from the left to view its contents.</p>
         </div>
     </div>
@@ -52,6 +80,192 @@
         dropdown.onmouseleave = () => {
             dropdown.classList.remove('show');
         };
+
+        // Tab functionality
+        const contentArea = document.getElementById('content-area');
+
+        document.getElementById('calendar-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Calendar</h2>
+                <div class="calendar-container">
+                    <div class="month-title" id="month-title"></div>
+                    <div class="calendar" id="calendar"></div>
+                    <div class="event-list" id="event-list">
+                        <p>Select a day on the calendar to see events here.</p>
+                    </div>
+                </div>
+                <div class="month-navigation">
+                    <button class="arrow-button" onclick="changeMonth(-1)">Previous</button>
+                    <button class="arrow-button" onclick="changeMonth(1)">Next</button>
+                </div>
+            `;
+            renderCalendar();
+        };
+
+        document.getElementById('tasks-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Tasks</h2><p>Your tasks content goes here.</p>';
+        };
+
+        document.getElementById('files-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Files</h2><p>Your files content goes here.</p>';
+        };
+
+        document.getElementById('directory-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Member Directory</h2><p>Your member directory content goes here.</p>';
+        };
+
+        // Current date and month
+        const currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const events = {
+            August: {
+                3: { name: "Freshman Orientation", time: "10 AM", location: "Auditorium", details: "Welcome to all new students!" },
+                10: { name: "Ice Cream Social", time: "5 PM", location: "Quad", details: "Enjoy ice cream and meet new friends!" },
+                15: { name: "Campus Job Fair", time: "2 PM", location: "Main Hall", details: "Meet potential employers." },
+                22: { name: "Outdoor Yoga Session", time: "6 PM", location: "Sports Field", details: "Join us for a relaxing yoga session." },
+                25: { name: "Outdoor Movie Night", time: "7 PM", location: "Quad", details: "Join us for a movie under the stars!" },
+            },
+            September: {
+                1: { name: "Welcome Back BBQ", time: "3 PM", location: "Campus Center", details: "Kick off the semester with good food!" },
+                5: { name: "Clubs & Organizations Fair", time: "11 AM", location: "Campus Center", details: "Explore various clubs to join." },
+                12: { name: "Study Skills Workshop", time: "1 PM", location: "Room 101", details: "Learn effective study techniques." },
+                19: { name: "Movie Night: Classic Films", time: "8 PM", location: "Auditorium", details: "Watch classics with friends!" },
+                26: { name: "Career Development Seminar", time: "3 PM", location: "Room 204", details: "Enhance your resume and interview skills." },
+            },
+            // Add other months similarly
+            October: {
+                4: { name: "Midterm Review Session", time: "5 PM", location: "Library", details: "Prepare for midterms with peers." },
+                14: { name: "Halloween Costume Contest", time: "6 PM", location: "Main Hall", details: "Dress up and win prizes!" },
+            },
+            November: {
+                11: { name: "Veterans Day Ceremony", time: "11 AM", location: "Memorial Plaza", details: "Honoring our veterans." },
+                24: { name: "Thanksgiving Dinner", time: "5 PM", location: "Dining Hall", details: "Join us for a festive dinner." },
+            },
+            December: {
+                1: { name: "Winter Fest", time: "2 PM", location: "Campus Center", details: "Enjoy winter-themed activities." },
+                15: { name: "Finals Study Break", time: "3 PM", location: "Quad", details: "Free coffee and snacks!" },
+            }
+        };
+
+
+        function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+
+            // Update month title
+            const monthTitle = document.getElementById('month-title');
+            monthTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Days container
+            const daysDiv = document.createElement('div');
+            daysDiv.className = 'days-container';
+
+            // Days of the week
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            daysOfWeek.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day-header';
+                dayHeader.textContent = day;
+                daysDiv.appendChild(dayHeader);
+            });
+
+            // Create the calendar grid
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            // Fill in the empty cells before the first day
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'empty-cell';
+                daysDiv.appendChild(emptyCell);
+            }
+
+            // Fill in the days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.textContent = day;
+
+                // Highlight days with events
+                if (events[day]) {
+                    dayElement.classList.add('highlight');
+                }
+
+                dayElement.onclick = () => showEvents(day);
+                daysDiv.appendChild(dayElement);
+            }
+
+            calendar.appendChild(daysDiv);
+            showAllEvents(); // Show all events for the month initially
+        }
+
+        function showAllEvents() {
+            const eventList = document.getElementById('event-list');
+            const allEvents = Object.entries(events).map(([day, event]) => `
+                <div class="event">
+                    <h4>${event.name}</h4>
+                    <p><strong>Date:</strong> ${monthNames[currentMonth]} ${day}, ${currentYear}</p>
+                    <p><strong>Time:</strong> ${event.time}</p>
+                    <p><strong>Location:</strong> ${event.location}</p>
+                    <p><strong>Details:</strong> ${event.details}</p>
+                </div>
+            `).join('');
+
+            eventList.innerHTML = allEvents || '<p>No events scheduled for this month.</p>';
+        }
+
+        function showEvents(day) {
+            const monthName = monthNames[currentMonth]; // Get the current month name
+            const eventList = document.getElementById('event-list');
+            const monthEvents = events[monthName]; // Access events for the current month
+            const event = monthEvents[day]; // Get the event for the specific day
+
+            if (event) {
+                eventList.innerHTML = `
+                    <h3>Events for ${monthName} ${day}, ${currentYear}</h3>
+                    <div class="event">
+                        <h4>${event.name}</h4>
+                        <p><strong>Time:</strong> ${event.time}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Details:</strong> ${event.details}</p>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true)">Accept</button>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false)">Decline</button>
+                    </div>
+                `;
+            } else {
+                eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
+            }
+        }
+
+        // RSVP functionality
+        function rsvpEvent(eventName, isAccepted, button) {
+            // Set the active state for buttons
+            const rsvpButtons = document.querySelectorAll('.rsvp-button');
+            rsvpButtons.forEach(btn => {
+                btn.classList.remove('active'); // Remove active class from all buttons
+            });
+
+            button.classList.add('active'); // Add active class to the clicked button
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        }
     </script>
 </body>
 </html>
