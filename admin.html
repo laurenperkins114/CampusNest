@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusNest</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <style>
+        .event {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+            font-weight: bold;
+        }
+        .active {
+            background-color: #4caf50;
+            color: white;
+        }
+        .month-navigation {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .arrow-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        .event-form {
+            display: none; /* Hide by default */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="#" id="home-link">CampusNest</a></h1>
+        <div class="dropdown">
+            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div class="dropdown-content" id="dropdown-menu">
+                <a href="user-profile.html">User Profile</a>
+                <a href="login.html">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <div id="calendar-tab">Calendar</div>
+            <div id="tasks-tab">Tasks</div>
+            <div id="files-tab">Files</div>
+            <div id="directory-tab">Member Directory</div>
+        </nav>
+
+        <div class="content" id="content-area">
+            <h2>Welcome to CampusNest!</h2>
+            <p class="welcome-message">Your one-stop platform for managing campus life. Explore our features to make the most of your experience.</p>
+            <p>Select a topic from the left to view its contents.</p>
+        </div>
+    </div>
+
+    <script>
+        // Dropdown menu functionality
+        const dropdown = document.getElementById('dropdown-menu');
+        const userName = document.getElementById('user-name');
+
+        userName.onmouseenter = () => {
+            dropdown.classList.add('show');
+        };
+
+        userName.onmouseleave = () => {
+            dropdown.classList.remove('show');
+        };
+
+        dropdown.onmouseenter = () => {
+            dropdown.classList.add('show');
+        };
+
+        dropdown.onmouseleave = () => {
+            dropdown.classList.remove('show');
+        };
+
+        document.getElementById('home-link').onclick = (event) => {
+            event.preventDefault();
+            contentArea.innerHTML = `
+                <h2>Welcome to CampusNest!</h2>
+                <p>Your one-stop platform for managing campus life.</p>
+                <p>Select a topic from the left to view its contents.</p>
+            `;
+        };
+
+        const contentArea = document.getElementById('content-area');
+
+        document.getElementById('calendar-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Calendar</h2>
+                <div class="calendar-container" id="calendar-container">
+                    <div class="month-title" id="month-title"></div>
+                    <div class="calendar" id="calendar"></div>
+                    <div class="event-list" id="event-list">
+                        <p>Select a day on the calendar to see events here.</p>
+                    </div>
+                    <div id="event-form" class="event-form">
+                        <h3 id="form-title">Add/Edit Event</h3>
+                        <input type="text" id="event-date" placeholder="MM/DD/YYYY" readonly>
+                        <input type="text" id="event-name" placeholder="Event Name">
+                        <input type="text" id="event-time" placeholder="Time">
+                        <input type="text" id="event-location" placeholder="Location">
+                        <textarea id="event-details" placeholder="Details"></textarea>
+                        <button id="save-event-button">Save Event</button>
+                        <button id="delete-event-button" style="display: none;">Delete Event</button>
+                    </div>
+                </div>
+                <div class="month-navigation">
+                    <button class="arrow-button" onclick="changeMonth(-1)">Previous</button>
+                    <button class="arrow-button" onclick="changeMonth(1)">Next</button>
+                </div>
+            `;
+            renderCalendar();
+        };
+
+        const currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const events = {}; // Initialize events object
+
+        function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+
+            const monthTitle = document.getElementById('month-title');
+            monthTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            const daysDiv = document.createElement('div');
+            daysDiv.className = 'days-container';
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'empty-cell';
+                daysDiv.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.textContent = day;
+                dayElement.onclick = () => showEventDetails(day);
+
+                // Highlight days with events
+                if (events[monthNames[currentMonth]] && events[monthNames[currentMonth]][day]) {
+                    dayElement.style.backgroundColor = '#ffeb3b'; // Event color
+                }
+
+                daysDiv.appendChild(dayElement);
+            }
+
+            calendar.appendChild(daysDiv);
+            showAllEvents(); // Show all events for the month initially
+        }
+
+        function showAllEvents() {
+            const eventList = document.getElementById('event-list');
+            const monthName = monthNames[currentMonth];
+            const monthEvents = events[monthName] || {};
+
+            const allEvents = Object.entries(monthEvents).map(([day, event]) => `
+                <div class="event" onclick="showEventDetails(${day})">
+                    <h4>${event.name}</h4>
+                    <p><strong>Date:</strong> ${monthName} ${day}, ${currentYear}</p>
+                </div>
+            `).join('');
+
+            eventList.innerHTML = allEvents || '<p>No events scheduled for this month.</p>';
+        }
+
+        function showEventDetails(day) {
+            const monthName = monthNames[currentMonth];
+            const monthEvents = events[monthName] || {};
+            const event = monthEvents[day];
+
+            const eventDate = `${currentMonth + 1}/${day}/${currentYear}`; // Format date as MM/DD/YYYY
+            document.getElementById('event-date').value = eventDate; // Autofill date
+
+            if (event) {
+                document.getElementById('event-name').value = event.name;
+                document.getElementById('event-time').value = event.time;
+                document.getElementById('event-location').value = event.location;
+                document.getElementById('event-details').value = event.details;
+
+                document.getElementById('form-title').innerText = `Edit Event for ${eventDate}`;
+                document.getElementById('save-event-button').onclick = saveEvent; // Just call saveEvent
+                document.getElementById('delete-event-button').onclick = () => deleteEvent(monthName, day);
+                document.getElementById('delete-event-button').style.display = 'inline-block';
+                document.getElementById('event-form').style.display = 'block';
+            } else {
+                clearEventForm(monthName, day);
+            }
+        }
+
+        function clearEventForm(monthName, day) {
+            const eventDate = `${currentMonth + 1}/${day}/${currentYear}`; // Format date as MM/DD/YYYY
+            document.getElementById('event-date').value = eventDate; // Autofill the date
+            document.getElementById('event-name').value = '';
+            document.getElementById('event-time').value = '';
+            document.getElementById('event-location').value = '';
+            document.getElementById('event-details').value = '';
+
+            document.getElementById('form-title').innerText = `Add Event for ${monthName} ${day}`;
+            document.getElementById('save-event-button').onclick = () => saveEvent(monthName, day);
+            document.getElementById('delete-event-button').style.display = 'none';
+            document.getElementById('event-form').style.display = 'block'; // Ensure form is visible
+        }
+
+        function saveEvent() {
+            const date = document.getElementById('event-date').value;
+            const [month, day] = date.split('/').map(Number);
+            const monthName = monthNames[month - 1];
+
+            const eventDetails = {
+                name: document.getElementById('event-name').value,
+                time: document.getElementById('event-time').value,
+                location: document.getElementById('event-location').value,
+                details: document.getElementById('event-details').value
+            };
+
+            if (!events[monthName]) {
+                events[monthName] = {};
+            }
+
+            events[monthName][day] = eventDetails; // Save event
+            renderCalendar(); // Re-render calendar
+            showAllEvents(); // Update event list
+            document.getElementById('event-form').style.display = 'none'; // Hide the form
+        }
+
+        function deleteEvent(monthName, day) {
+            if (events[monthName] && events[monthName][day]) {
+                delete events[monthName][day]; // Remove event
+                renderCalendar(); // Re-render calendar
+                showAllEvents(); // Update event list
+                document.getElementById('event-form').style.display = 'none'; // Hide the form
+            }
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+
+            renderCalendar(); // Re-render calendar after month change
+        }
+    </script>
+</body>
+</html>
