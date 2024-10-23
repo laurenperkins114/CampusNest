@@ -35,7 +35,7 @@
 </head>
 <body>
     <header>
-        <h1>CampusNest</h1>
+        <h1><a href="#" id="home-link">CampusNest</a></h1>
         <div class="dropdown">
             <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
             <div class="dropdown-content" id="dropdown-menu">
@@ -81,13 +81,23 @@
             dropdown.classList.remove('show');
         };
 
+        document.getElementById('home-link').onclick = (event) => {
+            event.preventDefault(); // Prevent default anchor behavior
+            contentArea.innerHTML = ''; // Clear previous content
+            contentArea.innerHTML = `
+                <h2>Welcome to CampusNest!</h2>
+                <p class="welcome-message">Your one-stop platform for managing campus life. Explore our features to make the most of your experience.</p>
+                <p>Select a topic from the left to view its contents.</p>
+            `;
+        };
+
         // Tab functionality
         const contentArea = document.getElementById('content-area');
 
         document.getElementById('calendar-tab').onclick = () => {
             contentArea.innerHTML = `
                 <h2>Calendar</h2>
-                <div class="calendar-container">
+                <div class="calendar-container" id="calendar-container">
                     <div class="month-title" id="month-title"></div>
                     <div class="calendar" id="calendar"></div>
                     <div class="event-list" id="event-list">
@@ -100,7 +110,172 @@
                 </div>
             `;
             renderCalendar();
+
+            // Add click event listener to the document
+            document.addEventListener('click', handleClickOutside);
         };
+
+        document.getElementById('directory-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Member Directory</h2>
+                <table class="directory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>(123) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('John Doe', 'john.doe@example.com', '(123) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td>(987) 654-3210</td>
+                            <td><button class="export-button" onclick="exportInfo('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Emily Johnson</td>
+                            <td>emily.johnson@example.com</td>
+                            <td>(555) 123-4567</td>
+                            <td><button class="export-button" onclick="exportInfo('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Michael Brown</td>
+                            <td>michael.brown@example.com</td>
+                            <td>(555) 234-5678</td>
+                            <td><button class="export-button" onclick="exportInfo('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Davis</td>
+                            <td>sarah.davis@example.com</td>
+                            <td>(555) 345-6789</td>
+                            <td><button class="export-button" onclick="exportInfo('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>David Wilson</td>
+                            <td>david.wilson@example.com</td>
+                            <td>(555) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('David Wilson', 'david.wilson@example.com', '(555) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Olivia Martinez</td>
+                            <td>olivia.martinez@example.com</td>
+                            <td>(555) 567-8901</td>
+                            <td><button class="export-button" onclick="exportInfo('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>James Anderson</td>
+                            <td>james.anderson@example.com</td>
+                            <td>(555) 678-9012</td>
+                            <td><button class="export-button" onclick="exportInfo('James Anderson', 'james.anderson@example.com', '(555) 678-9012')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ava Thomas</td>
+                            <td>ava.thomas@example.com</td>
+                            <td>(555) 789-0123</td>
+                            <td><button class="export-button" onclick="exportInfo('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Benjamin Lee</td>
+                            <td>benjamin.lee@example.com</td>
+                            <td>(555) 890-1234</td>
+                            <td><button class="export-button" onclick="exportInfo('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Mia White</td>
+                            <td>mia.white@example.com</td>
+                            <td>(555) 901-2345</td>
+                            <td><button class="export-button" onclick="exportInfo('Mia White', 'mia.white@example.com', '(555) 901-2345')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Lucas Harris</td>
+                            <td>lucas.harris@example.com</td>
+                            <td>(555) 012-3456</td>
+                            <td><button class="export-button" onclick="exportInfo('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Chloe Clark</td>
+                            <td>chloe.clark@example.com</td>
+                            <td>(555) 123-4568</td>
+                            <td><button class="export-button" onclick="exportInfo('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Matthew Lewis</td>
+                            <td>matthew.lewis@example.com</td>
+                            <td>(555) 234-5679</td>
+                            <td><button class="export-button" onclick="exportInfo('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sophia Robinson</td>
+                            <td>sophia.robinson@example.com</td>
+                            <td>(555) 345-6780</td>
+                            <td><button class="export-button" onclick="exportInfo('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jackson Walker</td>
+                            <td>jackson.walker@example.com</td>
+                            <td>(555) 456-7891</td>
+                            <td><button class="export-button" onclick="exportInfo('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Isabella Hall</td>
+                            <td>isabella.hall@example.com</td>
+                            <td>(555) 567-8902</td>
+                            <td><button class="export-button" onclick="exportInfo('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Henry Young</td>
+                            <td>henry.young@example.com</td>
+                            <td>(555) 678-9013</td>
+                            <td><button class="export-button" onclick="exportInfo('Henry Young', 'henry.young@example.com', '(555) 678-9013')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Abigail King</td>
+                            <td>abigail.king@example.com</td>
+                            <td>(555) 789-0124</td>
+                            <td><button class="export-button" onclick="exportInfo('Abigail King', 'abigail.king@example.com', '(555) 789-0124')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Samuel Scott</td>
+                            <td>samuel.scott@example.com</td>
+                            <td>(555) 890-1235</td>
+                            <td><button class="export-button" onclick="exportInfo('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')">Export</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        };
+
+
+        function showEvents(day) {
+            const monthName = monthNames[currentMonth]; // Get the current month name
+            const eventList = document.getElementById('event-list');
+            const monthEvents = events[monthName]; // Access events for the current month
+            const event = monthEvents[day]; // Get the event for the specific day
+
+            if (event) {
+                eventList.innerHTML = `
+                    <h3>Events for ${monthName} ${day}, ${currentYear}</h3>
+                    <div class="event">
+                        <h4>${event.name}</h4>
+                        <p><strong>Time:</strong> ${event.time}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Details:</strong> ${event.details}</p>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true, this)">Accept</button>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
+                    </div>
+                `;
+            } else {
+                eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
+            }
+        }
 
         document.getElementById('tasks-tab').onclick = () => {
             contentArea.innerHTML = '<h2>Tasks</h2><p>Your tasks content goes here.</p>';
@@ -108,10 +283,6 @@
 
         document.getElementById('files-tab').onclick = () => {
             contentArea.innerHTML = '<h2>Files</h2><p>Your files content goes here.</p>';
-        };
-
-        document.getElementById('directory-tab').onclick = () => {
-            contentArea.innerHTML = '<h2>Member Directory</h2><p>Your member directory content goes here.</p>';
         };
 
         // Current date and month
@@ -154,20 +325,18 @@
             }
         };
 
+        const eventColor = '#ffeb3b'; // Change this hex code to your desired color
 
         function renderCalendar() {
             const calendar = document.getElementById('calendar');
             calendar.innerHTML = '';
 
-            // Update month title
             const monthTitle = document.getElementById('month-title');
             monthTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
-            // Days container
             const daysDiv = document.createElement('div');
             daysDiv.className = 'days-container';
 
-            // Days of the week
             const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             daysOfWeek.forEach(day => {
                 const dayHeader = document.createElement('div');
@@ -176,26 +345,26 @@
                 daysDiv.appendChild(dayHeader);
             });
 
-            // Create the calendar grid
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-            // Fill in the empty cells before the first day
             for (let i = 0; i < firstDay; i++) {
                 const emptyCell = document.createElement('div');
                 emptyCell.className = 'empty-cell';
                 daysDiv.appendChild(emptyCell);
             }
 
-            // Fill in the days of the month
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayElement = document.createElement('div');
                 dayElement.className = 'day';
                 dayElement.textContent = day;
 
-                // Highlight days with events
-                if (events[day]) {
-                    dayElement.classList.add('highlight');
+                const monthName = monthNames[currentMonth];
+                if (events[monthName] && events[monthName][day]) {
+                    dayElement.style.backgroundColor = eventColor;
+                    dayElement.style.color = getLuminance(eventColor) < 128 ? 'white' : 'black';
+                } else {
+                    dayElement.style.color = 'black'; // Default color for days without events
                 }
 
                 dayElement.onclick = () => showEvents(day);
@@ -206,12 +375,24 @@
             showAllEvents(); // Show all events for the month initially
         }
 
+        function getLuminance(hex) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            
+            return (0.299 * r + 0.587 * g + 0.114 * b);
+        }
+
+
         function showAllEvents() {
             const eventList = document.getElementById('event-list');
-            const allEvents = Object.entries(events).map(([day, event]) => `
-                <div class="event">
+            const monthName = monthNames[currentMonth]; // Get the current month name
+            const monthEvents = events[monthName] || {}; // Get events for the current month
+
+            const allEvents = Object.entries(monthEvents).map(([day, event]) => `
+                <div class="event" onclick="showEvents(${day})"> <!-- Add click event here -->
                     <h4>${event.name}</h4>
-                    <p><strong>Date:</strong> ${monthNames[currentMonth]} ${day}, ${currentYear}</p>
+                    <p><strong>Date:</strong> ${monthName} ${day}, ${currentYear}</p>
                     <p><strong>Time:</strong> ${event.time}</p>
                     <p><strong>Location:</strong> ${event.location}</p>
                     <p><strong>Details:</strong> ${event.details}</p>
@@ -220,6 +401,7 @@
 
             eventList.innerHTML = allEvents || '<p>No events scheduled for this month.</p>';
         }
+
 
         function showEvents(day) {
             const monthName = monthNames[currentMonth]; // Get the current month name
@@ -235,14 +417,15 @@
                         <p><strong>Time:</strong> ${event.time}</p>
                         <p><strong>Location:</strong> ${event.location}</p>
                         <p><strong>Details:</strong> ${event.details}</p>
-                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true)">Accept</button>
-                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false)">Decline</button>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true, this)">Accept</button>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
                     </div>
                 `;
             } else {
                 eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
             }
         }
+
 
         // RSVP functionality
         function rsvpEvent(eventName, isAccepted, button) {
@@ -265,6 +448,19 @@
                 currentYear++;
             }
             renderCalendar();
+        }
+
+        function exportInfo(name, email, phone) {
+            const info = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
+            const blob = new Blob([info], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name.replace(/\s+/g, '_')}_info.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>

@@ -230,3 +230,37 @@ header h1 a {
     background-color: #45a049; /* Darker green on hover */
     transform: scale(1.05); /* Slightly scale up on hover */
 }
+
+.event-form {
+    margin-top: 20px;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-form input,
+.event-form textarea {
+    width: 95%;
+    padding: 10px;
+    margin: 5px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; /* Adjust font size */
+}
+
+.event-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%; /* Make buttons full-width */
+}
+
+.event-form button:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
