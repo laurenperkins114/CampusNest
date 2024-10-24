@@ -191,6 +191,57 @@ header h1 a {
     color: inherit; /* Use the same color as the header text */
 }
 
+/* Styles specifically for the content area */
+.content-area {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Month heading styling */
+.content-area h4 {
+    font-size: 1.2em; /* Smaller than title */
+    margin: 10px 0;
+    cursor: pointer;
+    color: #007BFF; /* Change color for interactivity */
+    transition: color 0.3s;
+}
+
+.content-area h4:hover {
+    color: #0056b3; /* Darker color on hover */
+}
+
+/* Event container styling */
+.content-area div {
+    margin-top: 10px;
+}
+
+/* Individual event styling */
+.content-area div > div {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+/* Event name styling */
+.content-area strong {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Link styling */
+.content-area a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.content-area a:hover {
+    text-decoration: underline;
+}
+
 .directory-table {
     width: 100%;
     border-collapse: collapse;
@@ -229,4 +280,30 @@ header h1 a {
 .export-button:hover {
     background-color: #45a049; /* Darker green on hover */
     transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.event {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+}
+.highlight {
+    background-color: #ffeb3b;
+    font-weight: bold;
+}
+.active {
+    background-color: #4caf50;
+    color: white;
+}
+.month-navigation {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.arrow-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: 16px;
 }

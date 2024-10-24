@@ -5,37 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusNest</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .event {
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-        }
-        .highlight {
-            background-color: #ffeb3b;
-            font-weight: bold;
-        }
-        .active {
-            background-color: #4caf50;
-            color: white;
-        }
-        .month-navigation {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        .arrow-button {
-            cursor: pointer;
-            padding: 5px 10px;
-            margin: 0 10px;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1><a href="#" id="home-link">CampusNest</a></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 1</div>
+            <div class="dropdown-content" id="club-menu">
+                <a href="index.html">Club 1</a>
+                <a href="admin.html">Club 2</a>
+            </div>
+        </div>
+        
         <div class="dropdown">
             <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
             <div class="dropdown-content" id="dropdown-menu">
@@ -44,6 +26,7 @@
             </div>
         </div>
     </header>
+    
 
     <div class="container">
         <nav>
@@ -114,145 +97,6 @@
             // Add click event listener to the document
             document.addEventListener('click', handleClickOutside);
         };
-
-        document.getElementById('directory-tab').onclick = () => {
-            contentArea.innerHTML = `
-                <h2>Member Directory</h2>
-                <table class="directory-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>john.doe@example.com</td>
-                            <td>(123) 456-7890</td>
-                            <td><button class="export-button" onclick="exportInfo('John Doe', 'john.doe@example.com', '(123) 456-7890')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Jane Smith</td>
-                            <td>jane.smith@example.com</td>
-                            <td>(987) 654-3210</td>
-                            <td><button class="export-button" onclick="exportInfo('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Emily Johnson</td>
-                            <td>emily.johnson@example.com</td>
-                            <td>(555) 123-4567</td>
-                            <td><button class="export-button" onclick="exportInfo('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Michael Brown</td>
-                            <td>michael.brown@example.com</td>
-                            <td>(555) 234-5678</td>
-                            <td><button class="export-button" onclick="exportInfo('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Sarah Davis</td>
-                            <td>sarah.davis@example.com</td>
-                            <td>(555) 345-6789</td>
-                            <td><button class="export-button" onclick="exportInfo('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>David Wilson</td>
-                            <td>david.wilson@example.com</td>
-                            <td>(555) 456-7890</td>
-                            <td><button class="export-button" onclick="exportInfo('David Wilson', 'david.wilson@example.com', '(555) 456-7890')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Olivia Martinez</td>
-                            <td>olivia.martinez@example.com</td>
-                            <td>(555) 567-8901</td>
-                            <td><button class="export-button" onclick="exportInfo('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>James Anderson</td>
-                            <td>james.anderson@example.com</td>
-                            <td>(555) 678-9012</td>
-                            <td><button class="export-button" onclick="exportInfo('James Anderson', 'james.anderson@example.com', '(555) 678-9012')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Ava Thomas</td>
-                            <td>ava.thomas@example.com</td>
-                            <td>(555) 789-0123</td>
-                            <td><button class="export-button" onclick="exportInfo('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamin Lee</td>
-                            <td>benjamin.lee@example.com</td>
-                            <td>(555) 890-1234</td>
-                            <td><button class="export-button" onclick="exportInfo('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Mia White</td>
-                            <td>mia.white@example.com</td>
-                            <td>(555) 901-2345</td>
-                            <td><button class="export-button" onclick="exportInfo('Mia White', 'mia.white@example.com', '(555) 901-2345')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Lucas Harris</td>
-                            <td>lucas.harris@example.com</td>
-                            <td>(555) 012-3456</td>
-                            <td><button class="export-button" onclick="exportInfo('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Chloe Clark</td>
-                            <td>chloe.clark@example.com</td>
-                            <td>(555) 123-4568</td>
-                            <td><button class="export-button" onclick="exportInfo('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Matthew Lewis</td>
-                            <td>matthew.lewis@example.com</td>
-                            <td>(555) 234-5679</td>
-                            <td><button class="export-button" onclick="exportInfo('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Sophia Robinson</td>
-                            <td>sophia.robinson@example.com</td>
-                            <td>(555) 345-6780</td>
-                            <td><button class="export-button" onclick="exportInfo('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Jackson Walker</td>
-                            <td>jackson.walker@example.com</td>
-                            <td>(555) 456-7891</td>
-                            <td><button class="export-button" onclick="exportInfo('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Isabella Hall</td>
-                            <td>isabella.hall@example.com</td>
-                            <td>(555) 567-8902</td>
-                            <td><button class="export-button" onclick="exportInfo('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Henry Young</td>
-                            <td>henry.young@example.com</td>
-                            <td>(555) 678-9013</td>
-                            <td><button class="export-button" onclick="exportInfo('Henry Young', 'henry.young@example.com', '(555) 678-9013')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Abigail King</td>
-                            <td>abigail.king@example.com</td>
-                            <td>(555) 789-0124</td>
-                            <td><button class="export-button" onclick="exportInfo('Abigail King', 'abigail.king@example.com', '(555) 789-0124')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Samuel Scott</td>
-                            <td>samuel.scott@example.com</td>
-                            <td>(555) 890-1235</td>
-                            <td><button class="export-button" onclick="exportInfo('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')">Export</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        };
-
 
         function showEvents(day) {
             const monthName = monthNames[currentMonth]; // Get the current month name
@@ -426,7 +270,6 @@
             }
         }
 
-
         // RSVP functionality
         function rsvpEvent(eventName, isAccepted, button) {
             // Set the active state for buttons
@@ -449,6 +292,190 @@
             }
             renderCalendar();
         }
+
+        document.getElementById('tasks-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Tasks</h2><p>Your tasks content goes here.</p>';
+        };
+
+        document.getElementById('files-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Files</h2>';
+            const monthList = Object.keys(events).map(month => `
+                <div>
+                    <h4 onclick="toggleEvents('${month}')" style="cursor: pointer; color: #007BFF;">${month}</h4>
+                    <div id="${month}-events" style="display:none;"></div>
+                </div>
+            `).join('');
+
+            contentArea.innerHTML += monthList;
+        };
+
+        function toggleEvents(month) {
+            const eventContainer = document.getElementById(`${month}-events`);
+            if (eventContainer.style.display === 'none') {
+                eventContainer.style.display = 'block';
+                eventContainer.innerHTML = createEventList(events[month]);
+            } else {
+                eventContainer.style.display = 'none';
+            }
+        }
+
+        function createEventList(eventsForMonth) {
+            const loremIpsum = `\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
+
+            return Object.keys(eventsForMonth).map(day => {
+                const event = eventsForMonth[day];
+                const eventDetails = `Event: ${event.name}\nDate: ${day}\nTime: ${event.time}\nLocation: ${event.location}\nDetails: ${event.details}`;
+                const blob = new Blob([eventDetails + loremIpsum], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                return `
+                    <div>
+                        <strong>${event.name}</strong> on ${day} at ${event.time}, Location: ${event.location}
+                        <p>${event.details}</p>
+                        <a href="${url}" download="${event.name.replace(/\s+/g, '_')}_${day}.txt">Download Info</a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        
+        document.getElementById('directory-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Member Directory</h2>
+                <table class="directory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>(123) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('John Doe', 'john.doe@example.com', '(123) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td>(987) 654-3210</td>
+                            <td><button class="export-button" onclick="exportInfo('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Emily Johnson</td>
+                            <td>emily.johnson@example.com</td>
+                            <td>(555) 123-4567</td>
+                            <td><button class="export-button" onclick="exportInfo('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Michael Brown</td>
+                            <td>michael.brown@example.com</td>
+                            <td>(555) 234-5678</td>
+                            <td><button class="export-button" onclick="exportInfo('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Davis</td>
+                            <td>sarah.davis@example.com</td>
+                            <td>(555) 345-6789</td>
+                            <td><button class="export-button" onclick="exportInfo('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>David Wilson</td>
+                            <td>david.wilson@example.com</td>
+                            <td>(555) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('David Wilson', 'david.wilson@example.com', '(555) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Olivia Martinez</td>
+                            <td>olivia.martinez@example.com</td>
+                            <td>(555) 567-8901</td>
+                            <td><button class="export-button" onclick="exportInfo('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>James Anderson</td>
+                            <td>james.anderson@example.com</td>
+                            <td>(555) 678-9012</td>
+                            <td><button class="export-button" onclick="exportInfo('James Anderson', 'james.anderson@example.com', '(555) 678-9012')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ava Thomas</td>
+                            <td>ava.thomas@example.com</td>
+                            <td>(555) 789-0123</td>
+                            <td><button class="export-button" onclick="exportInfo('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Benjamin Lee</td>
+                            <td>benjamin.lee@example.com</td>
+                            <td>(555) 890-1234</td>
+                            <td><button class="export-button" onclick="exportInfo('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Mia White</td>
+                            <td>mia.white@example.com</td>
+                            <td>(555) 901-2345</td>
+                            <td><button class="export-button" onclick="exportInfo('Mia White', 'mia.white@example.com', '(555) 901-2345')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Lucas Harris</td>
+                            <td>lucas.harris@example.com</td>
+                            <td>(555) 012-3456</td>
+                            <td><button class="export-button" onclick="exportInfo('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Chloe Clark</td>
+                            <td>chloe.clark@example.com</td>
+                            <td>(555) 123-4568</td>
+                            <td><button class="export-button" onclick="exportInfo('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Matthew Lewis</td>
+                            <td>matthew.lewis@example.com</td>
+                            <td>(555) 234-5679</td>
+                            <td><button class="export-button" onclick="exportInfo('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sophia Robinson</td>
+                            <td>sophia.robinson@example.com</td>
+                            <td>(555) 345-6780</td>
+                            <td><button class="export-button" onclick="exportInfo('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jackson Walker</td>
+                            <td>jackson.walker@example.com</td>
+                            <td>(555) 456-7891</td>
+                            <td><button class="export-button" onclick="exportInfo('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Isabella Hall</td>
+                            <td>isabella.hall@example.com</td>
+                            <td>(555) 567-8902</td>
+                            <td><button class="export-button" onclick="exportInfo('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Henry Young</td>
+                            <td>henry.young@example.com</td>
+                            <td>(555) 678-9013</td>
+                            <td><button class="export-button" onclick="exportInfo('Henry Young', 'henry.young@example.com', '(555) 678-9013')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Abigail King</td>
+                            <td>abigail.king@example.com</td>
+                            <td>(555) 789-0124</td>
+                            <td><button class="export-button" onclick="exportInfo('Abigail King', 'abigail.king@example.com', '(555) 789-0124')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Samuel Scott</td>
+                            <td>samuel.scott@example.com</td>
+                            <td>(555) 890-1235</td>
+                            <td><button class="export-button" onclick="exportInfo('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')">Export</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        };
 
         function exportInfo(name, email, phone) {
             const info = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
