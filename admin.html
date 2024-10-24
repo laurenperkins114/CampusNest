@@ -39,14 +39,24 @@
 <body>
     <header>
         <h1><a href="#" id="home-link">CampusNest</a></h1>
+    
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 2</div>
+            <div class="dropdown-content" id="club-menu">
+                <a href="index.html">Club 1</a>
+                <a href="admin.html">Club 2</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <div id="user-name" class="dropdown-toggle">Gus the Eagle</div>
             <div class="dropdown-content" id="dropdown-menu">
                 <a href="user-profile.html">User Profile</a>
                 <a href="login.html">Log Out</a>
             </div>
         </div>
     </header>
+    
 
     <div class="container">
         <nav>
@@ -93,6 +103,8 @@
             `;
         };
 
+        
+        
         const contentArea = document.getElementById('content-area');
 
         document.getElementById('calendar-tab').onclick = () => {
@@ -132,7 +144,35 @@
             "July", "August", "September", "October", "November", "December"
         ];
 
-        const events = {}; // Initialize events object
+        const events = {
+            August: {
+                5: { name: "Welcome Back Picnic", time: "12 PM", location: "Central Park", details: "Join us for food and fun!" },
+                12: { name: "Game Night", time: "6 PM", location: "Student Lounge", details: "Bring your favorite board games!" },
+                18: { name: "Career Fair", time: "10 AM", location: "Main Hall", details: "Network with potential employers." },
+                24: { name: "Yoga in the Park", time: "8 AM", location: "City Park", details: "Start your day with some yoga." },
+                28: { name: "Movie Under the Stars", time: "7 PM", location: "Quad", details: "Enjoy a classic movie outdoors." },
+            },
+            September: {
+                3: { name: "Campus Welcome BBQ", time: "4 PM", location: "Campus Center", details: "Meet fellow students over BBQ!" },
+                7: { name: "Club Recruitment Fair", time: "11 AM", location: "Campus Center", details: "Sign up for clubs and organizations." },
+                14: { name: "Exam Prep Workshop", time: "1 PM", location: "Room 201", details: "Tips for effective studying." },
+                21: { name: "Outdoor Movie Night", time: "8 PM", location: "Auditorium", details: "Join us for a fun movie screening!" },
+                28: { name: "Resume Building Workshop", time: "3 PM", location: "Room 204", details: "Enhance your resume with expert tips." },
+            },
+            October: {
+                6: { name: "Midterm Study Session", time: "5 PM", location: "Library", details: "Study together for midterms!" },
+                15: { name: "Halloween Haunted House", time: "7 PM", location: "Main Hall", details: "Experience our spooky haunted house!" },
+            },
+            November: {
+                10: { name: "Veterans Appreciation Day", time: "11 AM", location: "Memorial Plaza", details: "Honoring those who served." },
+                22: { name: "Thanksgiving Potluck", time: "5 PM", location: "Dining Hall", details: "Bring a dish and share with everyone!" },
+            },
+            December: {
+                2: { name: "Holiday Market", time: "10 AM", location: "Campus Center", details: "Shop local vendors for gifts." },
+                16: { name: "Finals Relaxation Day", time: "3 PM", location: "Quad", details: "Free snacks and relaxation activities!" },
+            }
+        };
+
 
         function renderCalendar() {
             const calendar = document.getElementById('calendar');
@@ -268,6 +308,357 @@
 
             renderCalendar(); // Re-render calendar after month change
         }
+
+        function showEvents(day) {
+            const monthName = monthNames[currentMonth]; // Get the current month name
+            const eventList = document.getElementById('event-list');
+            const monthEvents = events[monthName]; // Access events for the current month
+            const event = monthEvents[day]; // Get the event for the specific day
+
+            if (event) {
+                eventList.innerHTML = `
+                    <h3>Events for ${monthName} ${day}, ${currentYear}</h3>
+                    <div class="event">
+                        <h4>${event.name}</h4>
+                        <p><strong>Time:</strong> ${event.time}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Details:</strong> ${event.details}</p>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true, this)">Accept</button>
+                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
+                    </div>
+                `;
+            } else {
+                eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
+            }
+        }
+
+        let tasks = [
+            // Existing tasks
+            { title: "Freshman Orientation", dueDate: '2024-08-03', description: "Welcome to all new students!", completed: false, rsvp: 'RSVPed' },
+            { title: "Ice Cream Social", dueDate: '2024-08-10', description: "Enjoy ice cream and meet new friends!", completed: false, rsvp: 'Declined' },
+            { title: "Campus Job Fair", dueDate: '2024-08-15', description: "Meet potential employers.", completed: false, rsvp: 'RSVPed' },
+            { title: "Welcome Back Picnic", dueDate: '2024-08-05', description: "Join us for food and fun! (Location: Central Park, Time: 12 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Game Night", dueDate: '2024-08-12', description: "Bring your favorite board games! (Location: Student Lounge, Time: 6 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Career Fair", dueDate: '2024-08-18', description: "Network with potential employers. (Location: Main Hall, Time: 10 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Yoga in the Park", dueDate: '2024-08-24', description: "Start your day with some yoga. (Location: City Park, Time: 8 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Movie Under the Stars", dueDate: '2024-08-28', description: "Enjoy a classic movie outdoors. (Location: Quad, Time: 7 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Campus Welcome BBQ", dueDate: '2024-09-03', description: "Meet fellow students over BBQ! (Location: Campus Center, Time: 4 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Club Recruitment Fair", dueDate: '2024-09-07', description: "Sign up for clubs and organizations. (Location: Campus Center, Time: 11 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Exam Prep Workshop", dueDate: '2024-09-14', description: "Tips for effective studying. (Location: Room 201, Time: 1 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Outdoor Movie Night", dueDate: '2024-09-21', description: "Join us for a fun movie screening! (Location: Auditorium, Time: 8 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Resume Building Workshop", dueDate: '2024-09-28', description: "Enhance your resume with expert tips. (Location: Room 204, Time: 3 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Midterm Study Session", dueDate: '2024-10-06', description: "Study together for midterms! (Location: Library, Time: 5 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Halloween Haunted House", dueDate: '2024-10-15', description: "Experience our spooky haunted house! (Location: Main Hall, Time: 7 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Veterans Appreciation Day", dueDate: '2024-11-10', description: "Honoring those who served. (Location: Memorial Plaza, Time: 11 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Thanksgiving Potluck", dueDate: '2024-11-22', description: "Bring a dish and share with everyone! (Location: Dining Hall, Time: 5 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Holiday Market", dueDate: '2024-12-02', description: "Shop local vendors for gifts. (Location: Campus Center, Time: 10 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Finals Study Break", dueDate: '2024-12-15', description: "Free coffee and snacks!", completed: false, rsvp: 'Declined' },
+            { title: "Finals Relaxation Day", dueDate: '2024-12-16', description: "Free snacks and relaxation activities! (Location: Quad, Time: 3 PM)", completed: false, rsvp: 'Pending' }
+        ];
+
+        // Display tasks when the "Tasks" tab is clicked
+        document.getElementById('tasks-tab').onclick = () => {
+            loadUserTasks();
+        };
+
+        function loadUserTasks() {
+            contentArea.innerHTML = `
+                <h2>Your Tasks</h2>
+                <ul id="taskList">
+                    ${tasks.map((task, index) => `
+                        <li id="task-${index}" class="${task.completed ? 'completed' : ''}">
+                            <input type="checkbox" onchange="toggleTask(${index}, this)" ${task.completed ? 'checked' : ''}>
+                            <div>
+                                <span id="title-display-${index}">${task.title}</span>
+                                <input type="text" value="${task.title}" id="title-${index}" style="display: none;">
+                                
+                                <span id="dueDate-display-${index}">${task.dueDate}</span>
+                                <input type="date" value="${task.dueDate}" id="dueDate-${index}" style="display: none;">
+                                
+                                <span id="description-display-${index}">${task.description}</span>
+                                <textarea id="description-${index}" style="display: none;">${task.description}</textarea>
+                            </div>
+                            <button onclick="editTask(${index})">Edit</button>
+                            <button onclick="deleteTask(${index})">Delete</button>
+                        </li>
+                    `).join('')}
+                </ul>
+                <button onclick="addTask()">Add Task</button>
+                <button onclick="saveUserTasks()">Save All Tasks</button>
+            `;
+        }
+
+        function toggleTask(index, checkbox) {
+            tasks[index].completed = checkbox.checked; // Update the completion state
+            const taskElement = document.getElementById(`task-${index}`);
+            
+            // Add or remove the 'completed' class based on the checkbox state
+            if (checkbox.checked) {
+                taskElement.classList.add('completed'); // Mark as completed
+            } else {
+                taskElement.classList.remove('completed'); // Mark as not completed
+            }
+        }
+
+        function saveUserTasks() {
+            alert('Tasks saved! This feature currently does not store tasks permanently.');
+        }
+
+        function isOverdue(dueDate) {
+            const today = new Date();
+            return new Date(dueDate) < today && !tasks.some(task => task.completed);
+        }
+
+        // Function to add a new task
+        function addTask() {
+            const newTask = { title: "New Task", dueDate: new Date().toISOString().split('T')[0], description: "Task description...", completed: false, rsvp: 'Pending' };
+            tasks.push(newTask);
+            loadUserTasks(); // Reload tasks
+        }
+
+        // Function to edit a task
+        function editTask(index) {
+            // Toggle visibility of display and input fields
+            document.getElementById(`title-display-${index}`).style.display = 'none';
+            document.getElementById(`dueDate-display-${index}`).style.display = 'none';
+            document.getElementById(`description-display-${index}`).style.display = 'none';
+            
+            document.getElementById(`title-${index}`).style.display = 'inline';
+            document.getElementById(`dueDate-${index}`).style.display = 'inline';
+            document.getElementById(`description-${index}`).style.display = 'inline';
+            
+            // Change button to save
+            const editButton = document.querySelector(`#task-${index} button:nth-child(3)`);
+            editButton.innerText = 'Save';
+            editButton.setAttribute('onclick', `saveTask(${index})`);
+        }
+
+        // Function to save an edited task
+        function saveTask(index) {
+            const title = document.getElementById(`title-${index}`).value;
+            const dueDate = document.getElementById(`dueDate-${index}`).value;
+            const description = document.getElementById(`description-${index}`).value;
+
+            if (title && dueDate && description) {
+                tasks[index] = { ...tasks[index], title, dueDate, description };
+                loadUserTasks(); // Reload tasks to reflect changes
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        // Function to delete a task
+        function deleteTask(index) {
+            if (confirm("Are you sure you want to delete this task?")) {
+                tasks.splice(index, 1); // Remove task from array
+                loadUserTasks(); // Reload tasks
+            }
+        }
+
+        function createEventList(eventsForMonth) {
+            const loremIpsum = `\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
+
+            return Object.keys(eventsForMonth).map(day => {
+                const event = eventsForMonth[day];
+                const eventDetails = `Event: ${event.name}\nDate: ${day}\nTime: ${event.time}\nLocation: ${event.location}\nDetails: ${event.details}`;
+                const blob = new Blob([eventDetails + loremIpsum], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+
+                return `
+                    <div>
+                        <strong>${event.name}</strong> on ${day} at ${event.time}, Location: ${event.location}
+                        <p>${event.details}</p>
+                        <a href="${url}" download="${event.name.replace(/\s+/g, '_')}_${day}.txt">Download Info</a>
+                        <button onclick="editEvent('${day}', '${event.name}', '${event.time}', '${event.location}', '${event.details}')">Edit</button>
+                        <div id="edit-${day}-${event.name.replace(/\s+/g, '-')}" style="display:none;">
+                            <textarea rows="4" cols="50">${event.details}</textarea>
+                            <button onclick="saveEdit('${day}', '${event.name}', this.previousElementSibling.value)">Save</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.getElementById('files-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Files</h2>';
+            const monthList = Object.keys(events).map(month => `
+                <div>
+                    <h4 onclick="toggleEvents('${month}')" style="cursor: pointer; color: #007BFF;">${month}</h4>
+                    <div id="${month}-events" style="display:none;"></div>
+                </div>
+            `).join('');
+
+            contentArea.innerHTML += monthList;
+        };
+
+        function toggleEvents(month) {
+            const eventContainer = document.getElementById(`${month}-events`);
+            if (eventContainer.style.display === 'none') {
+                eventContainer.style.display = 'block';
+                eventContainer.innerHTML = createEventList(events[month]);
+            } else {
+                eventContainer.style.display = 'none';
+            }
+        }
+
+        function editEvent(day, eventName, time, location, details) {
+            const editDiv = document.getElementById(`edit-${day}-${eventName.replace(/\s+/g, '-')}`);
+            editDiv.style.display = editDiv.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function saveEdit(day, eventName, newDetails) {
+            const month = Object.keys(events).find(month => events[month][day]);
+            events[month][day].details = newDetails; // Update the event details
+            alert(`Details for ${eventName} have been updated!`);
+        }
+
+        document.getElementById('directory-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Member Directory</h2>
+                <button id="export-all" onclick="exportAll()">Export All Data</button>
+                <table class="directory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${createMemberRow('John Doe', 'john.doe@example.com', '(123) 456-7890')}
+                        ${createMemberRow('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')}
+                        ${createMemberRow('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')}
+                        ${createMemberRow('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')}
+                        ${createMemberRow('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')}
+                        ${createMemberRow('David Wilson', 'david.wilson@example.com', '(555) 456-7890')}
+                        ${createMemberRow('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')}
+                        ${createMemberRow('James Anderson', 'james.anderson@example.com', '(555) 678-9012')}
+                        ${createMemberRow('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')}
+                        ${createMemberRow('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')}
+                        ${createMemberRow('Mia White', 'mia.white@example.com', '(555) 901-2345')}
+                        ${createMemberRow('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')}
+                        ${createMemberRow('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')}
+                        ${createMemberRow('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')}
+                        ${createMemberRow('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')}
+                        ${createMemberRow('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')}
+                        ${createMemberRow('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')}
+                        ${createMemberRow('Henry Young', 'henry.young@example.com', '(555) 678-9013')}
+                        ${createMemberRow('Abigail King', 'abigail.king@example.com', '(555) 789-0124')}
+                        ${createMemberRow('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')}
+                    </tbody>
+                </table>
+            `;
+        };
+
+        function createMemberRow(name, email, phone) {
+            return `
+                <tr>
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${phone}</td>
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                            <select onchange="handleAction(event, '${name}', '${email}', '${phone}')">
+                                <option value="">Select Action</option>
+                                <option value="export">Export</option>
+                                <option value="makeAdmin">Make Admin</option>
+                                <option value="delete">Delete from Group</option>
+                            </select>
+                            <button class="export-button" style="display:none;" onclick="exportInfo('${name}', '${email}', '${phone}')">Export</button>
+                            <button class="delete-confirmation-button" style="display:none; color: red;" onclick="deleteFromGroup('${name}', this)">Are you sure?</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function handleAction(event, name, email, phone, selectElement) {
+            const action = event.target.value;
+            const button = event.target.nextElementSibling; // Export button
+            const confirmationButton = event.target.nextElementSibling.nextElementSibling; // Confirmation button
+
+            if (action === 'export') {
+                button.style.display = 'inline-block'; // Show the export button
+                confirmationButton.style.display = 'none'; // Hide confirmation button
+            } else if (action === 'delete') {
+                confirmationButton.style.display = 'inline-block'; // Show confirmation button
+                button.style.display = 'none'; // Hide export button
+            } else {
+                button.style.display = 'none'; // Hide the export button for other actions
+                confirmationButton.style.display = 'none'; // Hide confirmation button
+            }
+
+            if (action === 'makeAdmin') {
+                makeAdmin(name);
+            }
+            event.target.value = action; 
+        }
+
+        function exportInfo(name, email, phone) {
+            const csvContent = `Name,Email,Phone\n"${name}","${email}","${phone}"`;
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name.replace(/\s+/g, '_')}_info.csv`; // Change to .csv extension
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportAll() {
+            const members = [
+                { name: 'John Doe', email: 'john.doe@example.com', phone: '(123) 456-7890' },
+                { name: 'Jane Smith', email: 'jane.smith@example.com', phone: '(987) 654-3210' },
+                { name: 'Emily Johnson', email: 'emily.johnson@example.com', phone: '(555) 123-4567' },
+                { name: 'Michael Brown', email: 'michael.brown@example.com', phone: '(555) 234-5678' },
+                { name: 'Sarah Davis', email: 'sarah.davis@example.com', phone: '(555) 345-6789' },
+                { name: 'David Wilson', email: 'david.wilson@example.com', phone: '(555) 456-7890' },
+                { name: 'Olivia Martinez', email: 'olivia.martinez@example.com', phone: '(555) 567-8901' },
+                { name: 'James Anderson', email: 'james.anderson@example.com', phone: '(555) 678-9012' },
+                { name: 'Ava Thomas', email: 'ava.thomas@example.com', phone: '(555) 789-0123' },
+                { name: 'Benjamin Lee', email: 'benjamin.lee@example.com', phone: '(555) 890-1234' },
+                { name: 'Mia White', email: 'mia.white@example.com', phone: '(555) 901-2345' },
+                { name: 'Lucas Harris', email: 'lucas.harris@example.com', phone: '(555) 012-3456' },
+                { name: 'Chloe Clark', email: 'chloe.clark@example.com', phone: '(555) 123-4568' },
+                { name: 'Matthew Lewis', email: 'matthew.lewis@example.com', phone: '(555) 234-5679' },
+                { name: 'Sophia Robinson', email: 'sophia.robinson@example.com', phone: '(555) 345-6780' },
+                { name: 'Jackson Walker', email: 'jackson.walker@example.com', phone: '(555) 456-7891' },
+                { name: 'Isabella Hall', email: 'isabella.hall@example.com', phone: '(555) 567-8902' },
+                { name: 'Henry Young', email: 'henry.young@example.com', phone: '(555) 678-9013' },
+                { name: 'Abigail King', email: 'abigail.king@example.com', phone: '(555) 789-0124' },
+                { name: 'Samuel Scott', email: 'samuel.scott@example.com', phone: '(555) 890-1235' }
+            ];
+            
+            // Create the CSV content for all members
+            const header = 'Name,Email,Phone';
+            const allData = members.map(member => `"${member.name}","${member.email}","${member.phone}"`).join('\n');
+            const csvContent = `${header}\n${allData}`;
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'all_members_info.csv'; // Filename for all members
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Clean up the URL object
+        }
+
+        function makeAdmin(name) {
+            // Implement the make admin functionality
+            console.log(`${name} has been made an admin`);
+        }
+
+        function deleteFromGroup(name, button) {
+            const row = button.closest('tr'); // Get the row of the clicked button
+            row.remove(); // Remove the row from the table
+            console.log(`Deleted ${name} from the group`);
+        }
+
     </script>
 </body>
 </html>

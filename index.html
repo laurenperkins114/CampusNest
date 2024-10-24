@@ -5,46 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusNest</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .event {
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-        }
-        .highlight {
-            background-color: #ffeb3b;
-            font-weight: bold;
-        }
-        .active {
-            background-color: #4caf50;
-            color: white;
-        }
-        .month-navigation {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        .arrow-button {
-            cursor: pointer;
-            padding: 5px 10px;
-            margin: 0 10px;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1><a href="#" id="home-link">CampusNest</a></h1>
+    
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 1</div>
+            <div class="dropdown-content" id="club-menu">
+                <a href="index.html">Club 1</a>
+                <a href="admin.html">Club 2</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <div id="user-name" class="dropdown-toggle">Gus the Eagle</div>
             <div class="dropdown-content" id="dropdown-menu">
                 <a href="user-profile.html">User Profile</a>
                 <a href="login.html">Log Out</a>
             </div>
         </div>
     </header>
-
+    
     <div class="container">
         <nav>
             <div id="calendar-tab">Calendar</div>
@@ -82,14 +64,14 @@
         };
 
         document.getElementById('home-link').onclick = (event) => {
-            event.preventDefault(); // Prevent default anchor behavior
-            contentArea.innerHTML = ''; // Clear previous content
+            event.preventDefault();
             contentArea.innerHTML = `
                 <h2>Welcome to CampusNest!</h2>
-                <p class="welcome-message">Your one-stop platform for managing campus life. Explore our features to make the most of your experience.</p>
+                <p>Your one-stop platform for managing campus life.</p>
                 <p>Select a topic from the left to view its contents.</p>
             `;
         };
+
 
         // Tab functionality
         const contentArea = document.getElementById('content-area');
@@ -115,145 +97,6 @@
             document.addEventListener('click', handleClickOutside);
         };
 
-        document.getElementById('directory-tab').onclick = () => {
-            contentArea.innerHTML = `
-                <h2>Member Directory</h2>
-                <table class="directory-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>john.doe@example.com</td>
-                            <td>(123) 456-7890</td>
-                            <td><button class="export-button" onclick="exportInfo('John Doe', 'john.doe@example.com', '(123) 456-7890')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Jane Smith</td>
-                            <td>jane.smith@example.com</td>
-                            <td>(987) 654-3210</td>
-                            <td><button class="export-button" onclick="exportInfo('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Emily Johnson</td>
-                            <td>emily.johnson@example.com</td>
-                            <td>(555) 123-4567</td>
-                            <td><button class="export-button" onclick="exportInfo('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Michael Brown</td>
-                            <td>michael.brown@example.com</td>
-                            <td>(555) 234-5678</td>
-                            <td><button class="export-button" onclick="exportInfo('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Sarah Davis</td>
-                            <td>sarah.davis@example.com</td>
-                            <td>(555) 345-6789</td>
-                            <td><button class="export-button" onclick="exportInfo('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>David Wilson</td>
-                            <td>david.wilson@example.com</td>
-                            <td>(555) 456-7890</td>
-                            <td><button class="export-button" onclick="exportInfo('David Wilson', 'david.wilson@example.com', '(555) 456-7890')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Olivia Martinez</td>
-                            <td>olivia.martinez@example.com</td>
-                            <td>(555) 567-8901</td>
-                            <td><button class="export-button" onclick="exportInfo('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>James Anderson</td>
-                            <td>james.anderson@example.com</td>
-                            <td>(555) 678-9012</td>
-                            <td><button class="export-button" onclick="exportInfo('James Anderson', 'james.anderson@example.com', '(555) 678-9012')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Ava Thomas</td>
-                            <td>ava.thomas@example.com</td>
-                            <td>(555) 789-0123</td>
-                            <td><button class="export-button" onclick="exportInfo('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamin Lee</td>
-                            <td>benjamin.lee@example.com</td>
-                            <td>(555) 890-1234</td>
-                            <td><button class="export-button" onclick="exportInfo('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Mia White</td>
-                            <td>mia.white@example.com</td>
-                            <td>(555) 901-2345</td>
-                            <td><button class="export-button" onclick="exportInfo('Mia White', 'mia.white@example.com', '(555) 901-2345')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Lucas Harris</td>
-                            <td>lucas.harris@example.com</td>
-                            <td>(555) 012-3456</td>
-                            <td><button class="export-button" onclick="exportInfo('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Chloe Clark</td>
-                            <td>chloe.clark@example.com</td>
-                            <td>(555) 123-4568</td>
-                            <td><button class="export-button" onclick="exportInfo('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Matthew Lewis</td>
-                            <td>matthew.lewis@example.com</td>
-                            <td>(555) 234-5679</td>
-                            <td><button class="export-button" onclick="exportInfo('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Sophia Robinson</td>
-                            <td>sophia.robinson@example.com</td>
-                            <td>(555) 345-6780</td>
-                            <td><button class="export-button" onclick="exportInfo('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Jackson Walker</td>
-                            <td>jackson.walker@example.com</td>
-                            <td>(555) 456-7891</td>
-                            <td><button class="export-button" onclick="exportInfo('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Isabella Hall</td>
-                            <td>isabella.hall@example.com</td>
-                            <td>(555) 567-8902</td>
-                            <td><button class="export-button" onclick="exportInfo('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Henry Young</td>
-                            <td>henry.young@example.com</td>
-                            <td>(555) 678-9013</td>
-                            <td><button class="export-button" onclick="exportInfo('Henry Young', 'henry.young@example.com', '(555) 678-9013')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Abigail King</td>
-                            <td>abigail.king@example.com</td>
-                            <td>(555) 789-0124</td>
-                            <td><button class="export-button" onclick="exportInfo('Abigail King', 'abigail.king@example.com', '(555) 789-0124')">Export</button></td>
-                        </tr>
-                        <tr>
-                            <td>Samuel Scott</td>
-                            <td>samuel.scott@example.com</td>
-                            <td>(555) 890-1235</td>
-                            <td><button class="export-button" onclick="exportInfo('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')">Export</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        };
-
-
         function showEvents(day) {
             const monthName = monthNames[currentMonth]; // Get the current month name
             const eventList = document.getElementById('event-list');
@@ -276,14 +119,6 @@
                 eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
             }
         }
-
-        document.getElementById('tasks-tab').onclick = () => {
-            contentArea.innerHTML = '<h2>Tasks</h2><p>Your tasks content goes here.</p>';
-        };
-
-        document.getElementById('files-tab').onclick = () => {
-            contentArea.innerHTML = '<h2>Files</h2><p>Your files content goes here.</p>';
-        };
 
         // Current date and month
         const currentDate = new Date();
@@ -426,7 +261,6 @@
             }
         }
 
-
         // RSVP functionality
         function rsvpEvent(eventName, isAccepted, button) {
             // Set the active state for buttons
@@ -449,6 +283,257 @@
             }
             renderCalendar();
         }
+
+        let tasks = [
+            { title: "Freshman Orientation", dueDate: '2024-08-03', description: "Welcome to all new students!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Ice Cream Social", dueDate: '2024-08-10', description: "Enjoy ice cream and meet new friends!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Declined' },
+            { title: "Campus Job Fair", dueDate: '2024-08-15', description: "Meet potential employers.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Outdoor Yoga Session", dueDate: '2024-08-22', description: "Join us for a relaxing yoga session.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Pending' },
+            { title: "Outdoor Movie Night", dueDate: '2024-08-25', description: "Join us for a movie under the stars!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+
+            { title: "Welcome Back BBQ", dueDate: '2024-09-01', description: "Kick off the semester with good food!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Clubs & Organizations Fair", dueDate: '2024-09-05', description: "Explore various clubs to join.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Declined' },
+            { title: "Study Skills Workshop", dueDate: '2024-09-12', description: "Learn effective study techniques.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Movie Night: Classic Films", dueDate: '2024-09-19', description: "Watch classics with friends!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Pending' },
+            { title: "Career Development Seminar", dueDate: '2024-09-26', description: "Enhance your resume and interview skills.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+
+            { title: "Midterm Review Session", dueDate: '2024-10-04', description: "Prepare for midterms with peers.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Joining the National Club", dueDate: '2024-10-15', description: 'Complete the registration for the national club.', externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Halloween Costume Contest", dueDate: '2024-10-14', description: "Dress up and win prizes!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Pending' },
+            { title: "Paying Dues", dueDate: '2024-10-20', description: 'Pay the dues for the national club membership.', externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Pending' },
+            { title: "Going to the First Meeting", dueDate: '2024-10-25', description: 'Attend the first meeting of the national club.', externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+
+            { title: "Veterans Day Ceremony", dueDate: '2024-11-11', description: "Honoring our veterans.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Pending' },
+            { title: "Thanksgiving Dinner", dueDate: '2024-11-24', description: "Join us for a festive dinner.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+
+            { title: "Winter Fest", dueDate: '2024-12-01', description: "Enjoy winter-themed activities.", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'RSVPed' },
+            { title: "Finals Study Break", dueDate: '2024-12-15', description: "Free coffee and snacks!", externalLink: 'https://my.georgiasouthern.edu/', completed: false, rsvp: 'Declined' }
+        ];
+
+        // Display tasks when the "Tasks" tab is clicked
+        document.getElementById('tasks-tab').onclick = () => {
+            loadUserTasks();
+        };
+
+        function loadUserTasks() {
+            contentArea.innerHTML = `
+                <h2>Your Tasks</h2>
+                <ul id="taskList">
+                    ${tasks.map((task, index) => `
+                        <li id="task-${index}" class="${task.completed ? 'completed' : ''}">
+                            <input type="checkbox" onchange="toggleTask(${index}, this)" ${task.completed ? 'checked' : ''}>
+                            <div>
+                                <strong>${task.title}</strong><br>
+                                Deadline: <span class="${isOverdue(task.dueDate) ? 'overdue' : ''}">${task.dueDate}</span><br>
+                                <a href="${task.externalLink}" target="_blank">Visit External Link</a><br>
+                                Description: ${task.description}
+                            </div>
+                        </li>
+                    `).join('')}
+                </ul>
+                <button onclick="saveUserTasks()">Save Tasks</button>
+            `;
+        }
+
+        function toggleTask(index, checkbox) {
+            tasks[index].completed = checkbox.checked; // Update the completion state
+            const taskElement = document.getElementById(`task-${index}`);
+            
+            // Add or remove the 'completed' class based on the checkbox state
+            if (checkbox.checked) {
+                taskElement.classList.add('completed'); // Mark as completed
+            } else {
+                taskElement.classList.remove('completed'); // Mark as not completed
+            }
+        }
+
+        function saveUserTasks() {
+            alert('Tasks saved! This feature currently does not store tasks permanently.');
+        }
+
+        function isOverdue(dueDate) {
+            const today = new Date();
+            return new Date(dueDate) < today && !tasks.some(task => task.completed);
+        }
+
+        document.getElementById('files-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Files</h2>';
+            const monthList = Object.keys(events).map(month => `
+                <div>
+                    <h4 onclick="toggleEvents('${month}')" style="cursor: pointer; color: #007BFF;">${month}</h4>
+                    <div id="${month}-events" style="display:none;"></div>
+                </div>
+            `).join('');
+
+            contentArea.innerHTML += monthList;
+        };
+
+        function toggleEvents(month) {
+            const eventContainer = document.getElementById(`${month}-events`);
+            if (eventContainer.style.display === 'none') {
+                eventContainer.style.display = 'block';
+                eventContainer.innerHTML = createEventList(events[month]);
+            } else {
+                eventContainer.style.display = 'none';
+            }
+        }
+
+        function createEventList(eventsForMonth) {
+            const loremIpsum = `\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
+
+            return Object.keys(eventsForMonth).map(day => {
+                const event = eventsForMonth[day];
+                const eventDetails = `Event: ${event.name}\nDate: ${day}\nTime: ${event.time}\nLocation: ${event.location}\nDetails: ${event.details}`;
+                const blob = new Blob([eventDetails + loremIpsum], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                return `
+                    <div>
+                        <strong>${event.name}</strong> on ${day} at ${event.time}, Location: ${event.location}
+                        <p>${event.details}</p>
+                        <a href="${url}" download="${event.name.replace(/\s+/g, '_')}_${day}.txt">Download Info</a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.getElementById('directory-tab').onclick = () => {
+            contentArea.innerHTML = `
+                <h2>Member Directory</h2>
+                <table class="directory-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>john.doe@example.com</td>
+                            <td>(123) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('John Doe', 'john.doe@example.com', '(123) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@example.com</td>
+                            <td>(987) 654-3210</td>
+                            <td><button class="export-button" onclick="exportInfo('Jane Smith', 'jane.smith@example.com', '(987) 654-3210')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Emily Johnson</td>
+                            <td>emily.johnson@example.com</td>
+                            <td>(555) 123-4567</td>
+                            <td><button class="export-button" onclick="exportInfo('Emily Johnson', 'emily.johnson@example.com', '(555) 123-4567')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Michael Brown</td>
+                            <td>michael.brown@example.com</td>
+                            <td>(555) 234-5678</td>
+                            <td><button class="export-button" onclick="exportInfo('Michael Brown', 'michael.brown@example.com', '(555) 234-5678')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Davis</td>
+                            <td>sarah.davis@example.com</td>
+                            <td>(555) 345-6789</td>
+                            <td><button class="export-button" onclick="exportInfo('Sarah Davis', 'sarah.davis@example.com', '(555) 345-6789')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>David Wilson</td>
+                            <td>david.wilson@example.com</td>
+                            <td>(555) 456-7890</td>
+                            <td><button class="export-button" onclick="exportInfo('David Wilson', 'david.wilson@example.com', '(555) 456-7890')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Olivia Martinez</td>
+                            <td>olivia.martinez@example.com</td>
+                            <td>(555) 567-8901</td>
+                            <td><button class="export-button" onclick="exportInfo('Olivia Martinez', 'olivia.martinez@example.com', '(555) 567-8901')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>James Anderson</td>
+                            <td>james.anderson@example.com</td>
+                            <td>(555) 678-9012</td>
+                            <td><button class="export-button" onclick="exportInfo('James Anderson', 'james.anderson@example.com', '(555) 678-9012')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ava Thomas</td>
+                            <td>ava.thomas@example.com</td>
+                            <td>(555) 789-0123</td>
+                            <td><button class="export-button" onclick="exportInfo('Ava Thomas', 'ava.thomas@example.com', '(555) 789-0123')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Benjamin Lee</td>
+                            <td>benjamin.lee@example.com</td>
+                            <td>(555) 890-1234</td>
+                            <td><button class="export-button" onclick="exportInfo('Benjamin Lee', 'benjamin.lee@example.com', '(555) 890-1234')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Mia White</td>
+                            <td>mia.white@example.com</td>
+                            <td>(555) 901-2345</td>
+                            <td><button class="export-button" onclick="exportInfo('Mia White', 'mia.white@example.com', '(555) 901-2345')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Lucas Harris</td>
+                            <td>lucas.harris@example.com</td>
+                            <td>(555) 012-3456</td>
+                            <td><button class="export-button" onclick="exportInfo('Lucas Harris', 'lucas.harris@example.com', '(555) 012-3456')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Chloe Clark</td>
+                            <td>chloe.clark@example.com</td>
+                            <td>(555) 123-4568</td>
+                            <td><button class="export-button" onclick="exportInfo('Chloe Clark', 'chloe.clark@example.com', '(555) 123-4568')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Matthew Lewis</td>
+                            <td>matthew.lewis@example.com</td>
+                            <td>(555) 234-5679</td>
+                            <td><button class="export-button" onclick="exportInfo('Matthew Lewis', 'matthew.lewis@example.com', '(555) 234-5679')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sophia Robinson</td>
+                            <td>sophia.robinson@example.com</td>
+                            <td>(555) 345-6780</td>
+                            <td><button class="export-button" onclick="exportInfo('Sophia Robinson', 'sophia.robinson@example.com', '(555) 345-6780')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Jackson Walker</td>
+                            <td>jackson.walker@example.com</td>
+                            <td>(555) 456-7891</td>
+                            <td><button class="export-button" onclick="exportInfo('Jackson Walker', 'jackson.walker@example.com', '(555) 456-7891')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Isabella Hall</td>
+                            <td>isabella.hall@example.com</td>
+                            <td>(555) 567-8902</td>
+                            <td><button class="export-button" onclick="exportInfo('Isabella Hall', 'isabella.hall@example.com', '(555) 567-8902')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Henry Young</td>
+                            <td>henry.young@example.com</td>
+                            <td>(555) 678-9013</td>
+                            <td><button class="export-button" onclick="exportInfo('Henry Young', 'henry.young@example.com', '(555) 678-9013')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Abigail King</td>
+                            <td>abigail.king@example.com</td>
+                            <td>(555) 789-0124</td>
+                            <td><button class="export-button" onclick="exportInfo('Abigail King', 'abigail.king@example.com', '(555) 789-0124')">Export</button></td>
+                        </tr>
+                        <tr>
+                            <td>Samuel Scott</td>
+                            <td>samuel.scott@example.com</td>
+                            <td>(555) 890-1235</td>
+                            <td><button class="export-button" onclick="exportInfo('Samuel Scott', 'samuel.scott@example.com', '(555) 890-1235')">Export</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        };
 
         function exportInfo(name, email, phone) {
             const info = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
