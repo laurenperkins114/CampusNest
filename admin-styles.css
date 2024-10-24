@@ -1,3 +1,4 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -22,14 +23,22 @@ header {
 
 h1 {
     margin: 0;
+    font-size: 1.5em; /* Match size with dropdown */
 }
 
+header h1 a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the same color as the header text */
+}
+
+/* Container Styles */
 .container {
     display: flex;
     width: 100%;
     margin-top: 20px;
 }
 
+/* Navigation Styles */
 nav {
     width: 200px;
     background: white;
@@ -52,6 +61,7 @@ nav div:hover {
     background: #e7e7e7;
 }
 
+/* Content Area Styles */
 .content {
     flex-grow: 1;
     background: white;
@@ -60,6 +70,7 @@ nav div:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Dropdown Styles */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -68,11 +79,14 @@ nav div:hover {
 .dropdown-toggle {
     cursor: pointer;
     padding: 10px;
+    font-size: 1.5em; /* Match font size with h1 */
+    font-weight: bold; /* Make text bold */
+    color: white; /* Text color */
     transition: background 0.3s;
 }
 
 .dropdown-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
 }
 
 .dropdown-content {
@@ -82,7 +96,7 @@ nav div:hover {
     min-width: 160px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    border-radius: 5px; /* Add rounded corners */
+    border-radius: 5px;
 }
 
 .dropdown-content a {
@@ -100,7 +114,7 @@ nav div:hover {
     display: block;
 }
 
-/* Additional styles for calendar and events */
+/* Calendar and Event Styles */
 .calendar-container {
     display: flex; /* Aligns children side by side */
 }
@@ -110,16 +124,39 @@ nav div:hover {
     margin-right: 20px; /* Space between calendar and event list */
 }
 
-.event-list {
-    width: 250px; /* Fixed width for event list */
-    background: white; /* Background color */
-    padding: 10px; /* Padding inside the event list */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    overflow-y: auto; /* Allow vertical scrolling */
-    max-height: 400px; /* Max height for scrolling */
+/* Style for month headers */
+h4 {
+    font-size: 1.5em; /* Increase font size for month headers */
+    margin: 15px 0; /* Space above and below month headers */
+    color: #007BFF; /* Consistent color for month headers */
 }
 
+/* Style for buttons in the Files section */
+#files-tab button {
+    display: block; /* Make buttons block elements */
+    width: 100%; /* Full width for buttons */
+    margin-top: 10px; /* Space above buttons */
+    padding: 10px; /* Comfortable padding */
+    font-size: 1em; /* Button font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007BFF; /* Primary button color */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor for buttons */
+    transition: background 0.3s; /* Smooth transition for hover effect */
+}
+
+#files-tab button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Style for the event list */
+.month-events {
+    margin-bottom: 20px; /* Space below each month's events */
+}
+
+
+/* Day Styles */
 .day {
     padding: 10px;
     border: 1px solid #ccc;
@@ -127,17 +164,25 @@ nav div:hover {
     text-align: center;
     cursor: pointer;
     background-color: #f9f9f9;
-}
-.day:hover {
-    background-color: #e0e0e0;
+    height: 40px; /* Height for days */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s;
 }
 
+.day:hover {
+    background-color: #e0e0e0; /* Highlight on hover */
+}
+
+/* Month Title Styles */
 .month-title {
     font-size: 1.5em;
     text-align: center;
     margin-bottom: 10px;
 }
 
+/* Days Container Styles */
 .days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 columns for the days of the week */
@@ -153,20 +198,7 @@ nav div:hover {
     height: 40px; /* Height for empty cells */
 }
 
-.day {
-    height: 40px; /* Height for days */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ddd; /* Optional border */
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.day:hover {
-    background-color: #f0f0f0; /* Highlight on hover */
-}
-
+/* Navigation Button Styles */
 .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -186,11 +218,7 @@ nav div:hover {
     background-color: #0056b3;
 }
 
-header h1 a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Use the same color as the header text */
-}
-
+/* Directory Table Styles */
 .directory-table {
     width: 100%;
     border-collapse: collapse;
@@ -200,7 +228,8 @@ header h1 a {
     overflow: hidden; /* Round corners */
 }
 
-.directory-table th, .directory-table td {
+.directory-table th,
+.directory-table td {
     border: 1px solid #e0e0e0; /* Softer border */
     padding: 12px; /* Slightly larger padding */
     text-align: left;
@@ -216,6 +245,11 @@ header h1 a {
     background-color: #f1f1f1; /* Highlight on hover */
 }
 
+.directory-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row background */
+}
+
+/* Export Button Styles */
 .export-button {
     background-color: #4caf50;
     color: white;
@@ -231,6 +265,7 @@ header h1 a {
     transform: scale(1.05); /* Slightly scale up on hover */
 }
 
+/* Event Form Styles */
 .event-form {
     margin-top: 20px;
     background-color: #fafafa;
@@ -251,7 +286,7 @@ header h1 a {
 }
 
 .event-form button {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     padding: 10px;
     border: none;
@@ -265,29 +300,7 @@ header h1 a {
     background-color: #45a049; /* Darker shade on hover */
 }
 
-.directory-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.directory-table th, .directory-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.directory-table th {
-    background-color: #f2f2f2;
-}
-
-.directory-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.directory-table tr:hover {
-    background-color: #f1f1f1;
-}
-
+/* Select Dropdown Styles */
 select {
     padding: 5px;
     border: 1px solid #ccc;
@@ -301,16 +314,74 @@ select option {
     padding: 10px; /* Space for dropdown options */
 }
 
-.export-button {
-    margin-left: 10px; /* Spacing between dropdown and button */
-    padding: 5px 10px;
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
+/* Task list styles */
+#taskList {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0; /* Removes padding around the list */
+    font-size: 20px; /* Make the button text smaller */
+}
+
+li {
+    background: white; /* Background color for each task */
+    margin: 10px 0; /* Space between tasks */
+    padding: 15px; /* Space inside each task */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.completed {
+    text-decoration: line-through; /* Strikethrough for completed tasks */
+    color: gray; /* Gray color for completed tasks */
+}
+
+input[type="text"],
+textarea {
+    width: calc(100% - 20px);
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+textarea {
+    height: 60px; /* Fixed height for description */
+    resize: none; /* Prevent resizing */
+}
+
+button {
+    background-color: #28a745;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 5px;
+    font-size: 14px; /* Make the button text smaller */
+    padding: 5px 8px; /* Adjust padding for smaller buttons */
 }
 
-.export-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+button:hover {
+    background-color: #218838;
+}
+
+button:nth-child(2) {
+    background-color: #dc3545; /* Delete button color */
+}
+
+button:nth-child(2):hover {
+    background-color: #c82333; /* Delete button hover color */
+}
+
+/* Task details styles */
+.task-details {
+    margin-top: 5px; /* Space above details */
+    font-size: 20px; /* Adjust this value as needed */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    li {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        align-items: flex-start; /* Align items to the start */
+    }
 }

@@ -1,3 +1,4 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,6 +8,7 @@ body {
     flex-direction: column;
 }
 
+/* Header Styles */
 header {
     display: flex;
     justify-content: space-between;
@@ -22,14 +24,66 @@ header {
 
 h1 {
     margin: 0;
+    font-size: 1.5em; /* Match size with dropdown */
 }
 
+header h1 a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the same color as the header text */
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.5em; /* Match font size with h1 */
+    font-weight: bold; /* Make text bold */
+    color: white; /* Text color */
+    transition: background 0.3s;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Container Styles */
 .container {
     display: flex;
     width: 100%;
     margin-top: 20px;
 }
 
+/* Navigation Styles */
 nav {
     width: 200px;
     background: white;
@@ -49,9 +103,10 @@ nav div {
 }
 
 nav div:hover {
-    background: #e7e7e7;
+    background: #e7e7e7; /* Change color on hover */
 }
 
+/* Content Area Styles */
 .content {
     flex-grow: 1;
     background: white;
@@ -60,47 +115,112 @@ nav div:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
+.content-area {
+    padding: 20px;
 }
 
-.dropdown-toggle {
+/* Month Heading Styles */
+.content-area h4 {
+    font-size: 1.2em; /* Smaller than title */
+    margin: 10px 0;
     cursor: pointer;
-    padding: 10px;
-    transition: background 0.3s;
+    color: #007BFF; /* Color for interactivity */
+    transition: color 0.3s;
 }
 
-.dropdown-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.content-area h4:hover {
+    color: #0056b3; /* Darker color on hover */
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px; /* Add rounded corners */
+/* Event Styling */
+.content-area div {
+    margin-top: 10px;
 }
 
-.dropdown-content a {
-    color: #333;
-    padding: 10px 15px;
+.content-area div > div {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.content-area strong {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.content-area a {
+    color: #007BFF;
     text-decoration: none;
-    display: block;
+    font-weight: bold;
 }
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1; /* Light gray on hover */
+.content-area a:hover {
+    text-decoration: underline;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+/* Directory Table Styles */
+.directory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Round corners */
 }
 
-/* Additional styles for calendar and events */
+.directory-table th, .directory-table td {
+    border: 1px solid #e0e0e0; /* Softer border */
+    padding: 12px; /* Slightly larger padding */
+    text-align: left;
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.directory-table th {
+    background-color: #f9f9f9; /* Softer background */
+    font-weight: bold;
+}
+
+.directory-table tr:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Button Styles */
+.export-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Larger padding */
+    cursor: pointer;
+    border-radius: 5px; /* Softer button corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.export-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Event Styles */
+.event {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.highlight {
+    background-color: #ffeb3b;
+    font-weight: bold;
+}
+
+.active {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Calendar Styles */
 .calendar-container {
     display: flex; /* Aligns children side by side */
 }
@@ -128,8 +248,9 @@ nav div:hover {
     cursor: pointer;
     background-color: #f9f9f9;
 }
+
 .day:hover {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0; /* Highlight on hover */
 }
 
 .month-title {
@@ -163,10 +284,7 @@ nav div:hover {
     transition: background 0.3s;
 }
 
-.day:hover {
-    background-color: #f0f0f0; /* Highlight on hover */
-}
-
+/* Navigation Button Styles */
 .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -183,127 +301,46 @@ nav div:hover {
 }
 
 .nav-buttons button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker on hover */
 }
 
-header h1 a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Use the same color as the header text */
-}
-
-/* Styles specifically for the content area */
-.content-area {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
-
-/* Month heading styling */
-.content-area h4 {
-    font-size: 1.2em; /* Smaller than title */
-    margin: 10px 0;
-    cursor: pointer;
-    color: #007BFF; /* Change color for interactivity */
-    transition: color 0.3s;
-}
-
-.content-area h4:hover {
-    color: #0056b3; /* Darker color on hover */
-}
-
-/* Event container styling */
-.content-area div {
-    margin-top: 10px;
-}
-
-/* Individual event styling */
-.content-area div > div {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-}
-
-/* Event name styling */
-.content-area strong {
-    display: block;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
-
-/* Link styling */
-.content-area a {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.content-area a:hover {
-    text-decoration: underline;
-}
-
-.directory-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden; /* Round corners */
-}
-
-.directory-table th, .directory-table td {
-    border: 1px solid #e0e0e0; /* Softer border */
-    padding: 12px; /* Slightly larger padding */
-    text-align: left;
-    transition: background-color 0.3s; /* Smooth background transition */
-}
-
-.directory-table th {
-    background-color: #f9f9f9; /* Softer background */
-    font-weight: bold;
-}
-
-.directory-table tr:hover {
-    background-color: #f1f1f1; /* Highlight on hover */
-}
-
-.export-button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 8px 12px; /* Larger padding */
-    cursor: pointer;
-    border-radius: 5px; /* Softer button corners */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-}
-
-.export-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-.event {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-}
-.highlight {
-    background-color: #ffeb3b;
-    font-weight: bold;
-}
-.active {
-    background-color: #4caf50;
-    color: white;
-}
+/* Arrow Navigation Styles */
 .month-navigation {
     display: flex;
     justify-content: center;
     margin: 10px 0;
 }
+
 .arrow-button {
     cursor: pointer;
     padding: 5px 10px;
     margin: 0 10px;
     font-size: 16px;
+}
+
+ul {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0; /* Removes padding around the list */
+}
+
+li {
+    background: white; /* Background color for each task */
+    margin: 5px 0; /* Space between tasks */
+    padding: 10px; /* Space inside each task */
+    border-radius: 5px; /* Rounded corners for each task */
+    display: flex; /* Aligns items in a row */
+    align-items: flex-start; /* Aligns checkbox with the text at the start */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and task text */
+}
+
+.overdue {
+    color: red; /* Red color for overdue tasks */
+}
+
+.completed {
+    text-decoration: line-through; /* Strikethrough for completed tasks */
+    color: gray; /* Gray color for completed tasks */
 }

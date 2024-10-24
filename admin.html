@@ -39,23 +39,24 @@
 <body>
     <header>
         <h1><a href="#" id="home-link">CampusNest</a></h1>
-
+    
         <div class="dropdown">
-            <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 2</div>
+            <div class="dropdown-toggle club-name" onclick="toggleClubMenu()">Club 2</div>
             <div class="dropdown-content" id="club-menu">
-                <a href="index.html">Club 1</a>
-                <a href="admin.html">Club 2</a>
+                <a href="#" id="club1-link">Club 1</a>
+                <a href="#" id="club2-link">Club 2</a>
             </div>
         </div>
-
+    
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div id="user-name" class="dropdown-toggle">Gus the Eagle</div>
             <div class="dropdown-content" id="dropdown-menu">
                 <a href="user-profile.html">User Profile</a>
                 <a href="login.html">Log Out</a>
             </div>
         </div>
     </header>
+    
 
     <div class="container">
         <nav>
@@ -93,14 +94,42 @@
             dropdown.classList.remove('show');
         };
 
-        document.getElementById('home-link').onclick = (event) => {
-            event.preventDefault();
+        // Function to update the content area with the welcome message
+        function updateContent() {
             contentArea.innerHTML = `
                 <h2>Welcome to CampusNest!</h2>
                 <p>Your one-stop platform for managing campus life.</p>
                 <p>Select a topic from the left to view its contents.</p>
             `;
+        }
+
+        // Home link functionality
+        document.getElementById('home-link').onclick = (event) => {
+            event.preventDefault();
+            updateContent();
         };
+
+        // Club link functionality
+        document.getElementById('club1-link').onclick = (event) => {
+            event.preventDefault();
+            window.location.href = "index.html"; // Navigate to Club 1
+        };
+
+        document.getElementById('club2-link').onclick = (event) => {
+            event.preventDefault();
+            window.location.href = "admin.html"; // Navigate to Club 2
+        };
+
+        // Automatically update the content based on the current URL
+        window.onload = function() {
+            const path = window.location.pathname;
+            const page = path.split("/").pop(); // Get the current page name
+
+            if (page === "index.html" || page === "admin.html") {
+                updateContent(); // Show welcome message on both pages
+            }
+        };
+        
 
         const contentArea = document.getElementById('content-area');
 
@@ -329,31 +358,132 @@
             }
         }
 
+        let tasks = [
+            // Existing tasks
+            { title: "Freshman Orientation", dueDate: '2024-08-03', description: "Welcome to all new students!", completed: false, rsvp: 'RSVPed' },
+            { title: "Ice Cream Social", dueDate: '2024-08-10', description: "Enjoy ice cream and meet new friends!", completed: false, rsvp: 'Declined' },
+            { title: "Campus Job Fair", dueDate: '2024-08-15', description: "Meet potential employers.", completed: false, rsvp: 'RSVPed' },
+            { title: "Welcome Back Picnic", dueDate: '2024-08-05', description: "Join us for food and fun! (Location: Central Park, Time: 12 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Game Night", dueDate: '2024-08-12', description: "Bring your favorite board games! (Location: Student Lounge, Time: 6 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Career Fair", dueDate: '2024-08-18', description: "Network with potential employers. (Location: Main Hall, Time: 10 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Yoga in the Park", dueDate: '2024-08-24', description: "Start your day with some yoga. (Location: City Park, Time: 8 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Movie Under the Stars", dueDate: '2024-08-28', description: "Enjoy a classic movie outdoors. (Location: Quad, Time: 7 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Campus Welcome BBQ", dueDate: '2024-09-03', description: "Meet fellow students over BBQ! (Location: Campus Center, Time: 4 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Club Recruitment Fair", dueDate: '2024-09-07', description: "Sign up for clubs and organizations. (Location: Campus Center, Time: 11 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Exam Prep Workshop", dueDate: '2024-09-14', description: "Tips for effective studying. (Location: Room 201, Time: 1 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Outdoor Movie Night", dueDate: '2024-09-21', description: "Join us for a fun movie screening! (Location: Auditorium, Time: 8 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Resume Building Workshop", dueDate: '2024-09-28', description: "Enhance your resume with expert tips. (Location: Room 204, Time: 3 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Midterm Study Session", dueDate: '2024-10-06', description: "Study together for midterms! (Location: Library, Time: 5 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Halloween Haunted House", dueDate: '2024-10-15', description: "Experience our spooky haunted house! (Location: Main Hall, Time: 7 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Veterans Appreciation Day", dueDate: '2024-11-10', description: "Honoring those who served. (Location: Memorial Plaza, Time: 11 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Thanksgiving Potluck", dueDate: '2024-11-22', description: "Bring a dish and share with everyone! (Location: Dining Hall, Time: 5 PM)", completed: false, rsvp: 'Pending' },
+            { title: "Holiday Market", dueDate: '2024-12-02', description: "Shop local vendors for gifts. (Location: Campus Center, Time: 10 AM)", completed: false, rsvp: 'Pending' },
+            { title: "Finals Study Break", dueDate: '2024-12-15', description: "Free coffee and snacks!", completed: false, rsvp: 'Declined' },
+            { title: "Finals Relaxation Day", dueDate: '2024-12-16', description: "Free snacks and relaxation activities! (Location: Quad, Time: 3 PM)", completed: false, rsvp: 'Pending' }
+        ];
+
+        // Display tasks when the "Tasks" tab is clicked
         document.getElementById('tasks-tab').onclick = () => {
-            contentArea.innerHTML = '<h2>Tasks</h2><p>Your tasks content goes here.</p>';
-        };
-        
-        document.getElementById('files-tab').onclick = () => {
-            contentArea.innerHTML = '<h2>Files</h2>';
-            const monthList = Object.keys(events).map(month => `
-                <div>
-                    <h4 onclick="toggleEvents('${month}')" style="cursor: pointer; color: #007BFF;">${month}</h4>
-                    <div id="${month}-events" style="display:none;"></div>
-                </div>
-            `).join('');
-
-            contentArea.innerHTML += monthList;
+            loadUserTasks();
         };
 
-        function toggleEvents(month) {
-            const eventContainer = document.getElementById(`${month}-events`);
-            if (eventContainer.style.display === 'none') {
-                eventContainer.style.display = 'block';
-                eventContainer.innerHTML = createEventList(events[month]);
+        function loadUserTasks() {
+            contentArea.innerHTML = `
+                <h2>Your Tasks</h2>
+                <ul id="taskList">
+                    ${tasks.map((task, index) => `
+                        <li id="task-${index}" class="${task.completed ? 'completed' : ''}">
+                            <input type="checkbox" onchange="toggleTask(${index}, this)" ${task.completed ? 'checked' : ''}>
+                            <div>
+                                <span id="title-display-${index}">${task.title}</span>
+                                <input type="text" value="${task.title}" id="title-${index}" style="display: none;">
+                                
+                                <span id="dueDate-display-${index}">${task.dueDate}</span>
+                                <input type="date" value="${task.dueDate}" id="dueDate-${index}" style="display: none;">
+                                
+                                <span id="description-display-${index}">${task.description}</span>
+                                <textarea id="description-${index}" style="display: none;">${task.description}</textarea>
+                            </div>
+                            <button onclick="editTask(${index})">Edit</button>
+                            <button onclick="deleteTask(${index})">Delete</button>
+                        </li>
+                    `).join('')}
+                </ul>
+                <button onclick="addTask()">Add Task</button>
+                <button onclick="saveUserTasks()">Save All Tasks</button>
+            `;
+        }
+
+        function toggleTask(index, checkbox) {
+            tasks[index].completed = checkbox.checked; // Update the completion state
+            const taskElement = document.getElementById(`task-${index}`);
+            
+            // Add or remove the 'completed' class based on the checkbox state
+            if (checkbox.checked) {
+                taskElement.classList.add('completed'); // Mark as completed
             } else {
-                eventContainer.style.display = 'none';
+                taskElement.classList.remove('completed'); // Mark as not completed
             }
         }
+
+        function saveUserTasks() {
+            alert('Tasks saved! This feature currently does not store tasks permanently.');
+        }
+
+        function isOverdue(dueDate) {
+            const today = new Date();
+            return new Date(dueDate) < today && !tasks.some(task => task.completed);
+        }
+
+        // Function to add a new task
+        function addTask() {
+            const newTask = { title: "New Task", dueDate: new Date().toISOString().split('T')[0], description: "Task description...", completed: false, rsvp: 'Pending' };
+            tasks.push(newTask);
+            loadUserTasks(); // Reload tasks
+        }
+
+        // Function to edit a task
+        function editTask(index) {
+            // Toggle visibility of display and input fields
+            document.getElementById(`title-display-${index}`).style.display = 'none';
+            document.getElementById(`dueDate-display-${index}`).style.display = 'none';
+            document.getElementById(`description-display-${index}`).style.display = 'none';
+            
+            document.getElementById(`title-${index}`).style.display = 'inline';
+            document.getElementById(`dueDate-${index}`).style.display = 'inline';
+            document.getElementById(`description-${index}`).style.display = 'inline';
+            
+            // Change button to save
+            const editButton = document.querySelector(`#task-${index} button:nth-child(3)`);
+            editButton.innerText = 'Save';
+            editButton.setAttribute('onclick', `saveTask(${index})`);
+        }
+
+        // Function to save an edited task
+        function saveTask(index) {
+            const title = document.getElementById(`title-${index}`).value;
+            const dueDate = document.getElementById(`dueDate-${index}`).value;
+            const description = document.getElementById(`description-${index}`).value;
+
+            if (title && dueDate && description) {
+                tasks[index] = { ...tasks[index], title, dueDate, description };
+                loadUserTasks(); // Reload tasks to reflect changes
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        // Function to delete a task
+        function deleteTask(index) {
+            if (confirm("Are you sure you want to delete this task?")) {
+                tasks.splice(index, 1); // Remove task from array
+                loadUserTasks(); // Reload tasks
+            }
+        }
+
+
+        // Load tasks when the page is opened
+        loadUserTasks();
 
         function createEventList(eventsForMonth) {
             const loremIpsum = `\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
@@ -379,6 +509,28 @@
             }).join('');
         }
 
+        document.getElementById('files-tab').onclick = () => {
+            contentArea.innerHTML = '<h2>Files</h2>';
+            const monthList = Object.keys(events).map(month => `
+                <div>
+                    <h4 onclick="toggleEvents('${month}')" style="cursor: pointer; color: #007BFF;">${month}</h4>
+                    <div id="${month}-events" style="display:none;"></div>
+                </div>
+            `).join('');
+
+            contentArea.innerHTML += monthList;
+        };
+
+        function toggleEvents(month) {
+            const eventContainer = document.getElementById(`${month}-events`);
+            if (eventContainer.style.display === 'none') {
+                eventContainer.style.display = 'block';
+                eventContainer.innerHTML = createEventList(events[month]);
+            } else {
+                eventContainer.style.display = 'none';
+            }
+        }
+
         function editEvent(day, eventName, time, location, details) {
             const editDiv = document.getElementById(`edit-${day}-${eventName.replace(/\s+/g, '-')}`);
             editDiv.style.display = editDiv.style.display === 'none' ? 'block' : 'none';
@@ -389,7 +541,6 @@
             events[month][day].details = newDetails; // Update the event details
             alert(`Details for ${eventName} have been updated!`);
         }
-
 
         document.getElementById('directory-tab').onclick = () => {
             contentArea.innerHTML = `
@@ -475,12 +626,12 @@
         }
 
         function exportInfo(name, email, phone) {
-            const info = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-            const blob = new Blob([info], { type: 'text/plain' });
+            const csvContent = `Name,Email,Phone\n"${name}","${email}","${phone}"`;
+            const blob = new Blob([csvContent], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${name.replace(/\s+/g, '_')}_info.txt`;
+            a.download = `${name.replace(/\s+/g, '_')}_info.csv`; // Change to .csv extension
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -511,14 +662,16 @@
                 { name: 'Samuel Scott', email: 'samuel.scott@example.com', phone: '(555) 890-1235' }
             ];
             
-            // Create the info string for all members
-            const allData = members.map(member => `Name: ${member.name}\nEmail: ${member.email}\nPhone: ${member.phone}`).join('\n\n');
-            
-            const blob = new Blob([allData], { type: 'text/plain' });
+            // Create the CSV content for all members
+            const header = 'Name,Email,Phone';
+            const allData = members.map(member => `"${member.name}","${member.email}","${member.phone}"`).join('\n');
+            const csvContent = `${header}\n${allData}`;
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'all_members_info.txt'; // Filename for all members
+            a.download = 'all_members_info.csv'; // Filename for all members
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
