@@ -41,10 +41,10 @@
         <h1><a href="#" id="home-link">CampusNest</a></h1>
     
         <div class="dropdown">
-            <div class="dropdown-toggle club-name" onclick="toggleClubMenu()">Club 2</div>
+            <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 2</div>
             <div class="dropdown-content" id="club-menu">
-                <a href="#" id="club1-link">Club 1</a>
-                <a href="#" id="club2-link">Club 2</a>
+                <a href="index.html">Club 1</a>
+                <a href="admin.html">Club 2</a>
             </div>
         </div>
     
@@ -94,43 +94,17 @@
             dropdown.classList.remove('show');
         };
 
-        // Function to update the content area with the welcome message
-        function updateContent() {
+        document.getElementById('home-link').onclick = (event) => {
+            event.preventDefault();
             contentArea.innerHTML = `
                 <h2>Welcome to CampusNest!</h2>
                 <p>Your one-stop platform for managing campus life.</p>
                 <p>Select a topic from the left to view its contents.</p>
             `;
-        }
-
-        // Home link functionality
-        document.getElementById('home-link').onclick = (event) => {
-            event.preventDefault();
-            updateContent();
         };
 
-        // Club link functionality
-        document.getElementById('club1-link').onclick = (event) => {
-            event.preventDefault();
-            window.location.href = "index.html"; // Navigate to Club 1
-        };
-
-        document.getElementById('club2-link').onclick = (event) => {
-            event.preventDefault();
-            window.location.href = "admin.html"; // Navigate to Club 2
-        };
-
-        // Automatically update the content based on the current URL
-        window.onload = function() {
-            const path = window.location.pathname;
-            const page = path.split("/").pop(); // Get the current page name
-
-            if (page === "index.html" || page === "admin.html") {
-                updateContent(); // Show welcome message on both pages
-            }
-        };
         
-
+        
         const contentArea = document.getElementById('content-area');
 
         document.getElementById('calendar-tab').onclick = () => {
@@ -480,10 +454,6 @@
                 loadUserTasks(); // Reload tasks
             }
         }
-
-
-        // Load tasks when the page is opened
-        loadUserTasks();
 
         function createEventList(eventsForMonth) {
             const loremIpsum = `\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
