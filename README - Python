@@ -1,0 +1,40 @@
+1. Set Up Your Environment
+Install Python
+Make sure you have Python installed. You can download it from python.org.
+
+Install Flask
+You can install Flask using pip. Open your terminal and run:
+pip install Flask
+
+To set up your project structure in Visual Studio Code (VSCode), follow these steps:
+Step 1: Open VSCode
+Launch Visual Studio Code on your computer.
+
+Running the Application
+To start your Flask application, run the following command in the terminal:
+python app.py
+
+Exit the Virtual Environment 
+Deactivate the Virtual Environment: Type the following command and press Enter:
+deactivate
+
+To add a database to your Flask backend, you can use an ORM (Object-Relational Mapping) library like SQLAlchemy, which is commonly used with Flask. 
+
+Step 1: Install SQLAlchemy (in the detect node)
+You need to install SQLAlchemy and Flask-SQLAlchemy. You can do this using pip:
+
+pip install Flask-SQLAlchemy
+
+/your_project
+│
+├── app.py  # Your main Flask application file
+│
+├── templates/  # Folder for HTML files
+│   ├── home.html
+│   ├── admin.html
+│   ├── login.html
+│   ├── signup.html
+│   └── user-profile.html
+│
+└── static/  # Folder for CSS, JS, and other static files
+    └── style.css  # Your CSS file (example)
