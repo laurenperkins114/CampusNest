@@ -9,25 +9,23 @@
 <body>
     <div class="login-container" id="login-container">
         <h1>CampusNest</h1>
-        <form id="login-form">
+        <form id="login-form" method="POST" action="{{ url_for('login') }}">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" required>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="login-button">Login</button>
             <div class="links">
-                <a href="#">Forgot Password?</a>
-                <a href="signup.html">Sign Up</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
             </div>
         </form>
     </div>
 
-    <!-- Loading overlay -->
-    <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-overlay" id="loading-overlay" style="display: none;">
         <div>Loading...</div>
     </div>
 
@@ -35,16 +33,11 @@
         const form = document.getElementById('login-form');
         const loadingOverlay = document.getElementById('loading-overlay');
         const loginContainer = document.getElementById('login-container');
-    
-        form.onsubmit = (event) => {
-            event.preventDefault(); // Prevent immediate form submission
+
+        form.onsubmit = () => {
             loadingOverlay.style.display = 'flex'; // Show loading overlay
             loginContainer.classList.add('blur'); // Add blur effect to login container
-            setTimeout(() => {
-                window.location.href = 'home.html'; // Redirect after 3 seconds
-            }, 3000);
         };
     </script>
-    
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusNest</title>
+    <title>Admin - CampusNest</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='admin-styles.css') }}">
     <style>
         .event {
@@ -43,16 +43,16 @@
         <div class="dropdown">
             <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 2</div>
             <div class="dropdown-content" id="club-menu">
-                <a href="home.html">Club 1</a>
-                <a href="admin.html">Club 2</a>
+                <a href="{{ url_for('home_page') }}">Club 1</a>
+                <a href="{{ url_for('admin') }}">Club 2</a>
             </div>
         </div>
     
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Gus the Eagle</div>
+            <div id="user-name" class="dropdown-toggle">{{ session.get('username', 'Guest') }}</div>
             <div class="dropdown-content" id="dropdown-menu">
-                <a href="user-profile.html">User Profile</a>
-                <a href="login.html">Log Out</a>
+                <a href="{{ url_for('user_profile') }}">User Profile</a>
+                <a href="{{ url_for('login') }}">Log Out</a>
             </div>
         </div>
     </header>
@@ -67,8 +67,8 @@
         </nav>
 
         <div class="content" id="content-area">
-            <h2>Welcome to CampusNest!</h2>
-            <p class="welcome-message">Your one-stop platform for managing campus life. Explore our features to make the most of your experience.</p>
+            <h2>Welcome to CampusNest Admin!</h2>
+            <p class="welcome-message">Manage your club efficiently. Explore the options on the left to get started.</p>
             <p>Select a topic from the left to view its contents.</p>
         </div>
     </div>
@@ -146,32 +146,131 @@
 
         const events = {
             August: {
-                5: { name: "Welcome Back Picnic", time: "12 PM", location: "Central Park", details: "Join us for food and fun!" },
-                12: { name: "Game Night", time: "6 PM", location: "Student Lounge", details: "Bring your favorite board games!" },
-                18: { name: "Career Fair", time: "10 AM", location: "Main Hall", details: "Network with potential employers." },
-                24: { name: "Yoga in the Park", time: "8 AM", location: "City Park", details: "Start your day with some yoga." },
-                28: { name: "Movie Under the Stars", time: "7 PM", location: "Quad", details: "Enjoy a classic movie outdoors." },
+                5: { 
+                    name: "Welcome Back Picnic", 
+                    time: "12 PM", 
+                    location: "Central Park", 
+                    details: "Join us for food and fun!", 
+                    rsvp: { accepted: 15, declined: 3 } 
+                },
+                12: { 
+                    name: "Game Night", 
+                    time: "6 PM", 
+                    location: "Student Lounge", 
+                    details: "Bring your favorite board games!", 
+                    rsvp: { accepted: 20, declined: 5 } 
+                },
+                18: { 
+                    name: "Career Fair", 
+                    time: "10 AM", 
+                    location: "Main Hall", 
+                    details: "Network with potential employers.", 
+                    rsvp: { accepted: 30, declined: 2 } 
+                },
+                24: { 
+                    name: "Yoga in the Park", 
+                    time: "8 AM", 
+                    location: "City Park", 
+                    details: "Start your day with some yoga.", 
+                    rsvp: { accepted: 25, declined: 4 } 
+                },
+                28: { 
+                    name: "Movie Under the Stars", 
+                    time: "7 PM", 
+                    location: "Quad", 
+                    details: "Enjoy a classic movie outdoors.", 
+                    rsvp: { accepted: 18, declined: 1 } 
+                },
             },
             September: {
-                3: { name: "Campus Welcome BBQ", time: "4 PM", location: "Campus Center", details: "Meet fellow students over BBQ!" },
-                7: { name: "Club Recruitment Fair", time: "11 AM", location: "Campus Center", details: "Sign up for clubs and organizations." },
-                14: { name: "Exam Prep Workshop", time: "1 PM", location: "Room 201", details: "Tips for effective studying." },
-                21: { name: "Outdoor Movie Night", time: "8 PM", location: "Auditorium", details: "Join us for a fun movie screening!" },
-                28: { name: "Resume Building Workshop", time: "3 PM", location: "Room 204", details: "Enhance your resume with expert tips." },
+                3: { 
+                    name: "Campus Welcome BBQ", 
+                    time: "4 PM", 
+                    location: "Campus Center", 
+                    details: "Meet fellow students over BBQ!", 
+                    rsvp: { accepted: 40, declined: 8 } 
+                },
+                7: { 
+                    name: "Club Recruitment Fair", 
+                    time: "11 AM", 
+                    location: "Campus Center", 
+                    details: "Sign up for clubs and organizations.", 
+                    rsvp: { accepted: 35, declined: 7 } 
+                },
+                14: { 
+                    name: "Exam Prep Workshop", 
+                    time: "1 PM", 
+                    location: "Room 201", 
+                    details: "Tips for effective studying.", 
+                    rsvp: { accepted: 28, declined: 3 } 
+                },
+                21: { 
+                    name: "Outdoor Movie Night", 
+                    time: "8 PM", 
+                    location: "Auditorium", 
+                    details: "Join us for a fun movie screening!", 
+                    rsvp: { accepted: 22, declined: 5 } 
+                },
+                28: { 
+                    name: "Resume Building Workshop", 
+                    time: "3 PM", 
+                    location: "Room 204", 
+                    details: "Enhance your resume with expert tips.", 
+                    rsvp: { accepted: 15, declined: 2 } 
+                },
             },
             October: {
-                6: { name: "Midterm Study Session", time: "5 PM", location: "Library", details: "Study together for midterms!" },
-                15: { name: "Halloween Haunted House", time: "7 PM", location: "Main Hall", details: "Experience our spooky haunted house!" },
+                6: { 
+                    name: "Midterm Study Session", 
+                    time: "5 PM", 
+                    location: "Library", 
+                    details: "Study together for midterms!", 
+                    rsvp: { accepted: 20, declined: 1 } 
+                },
+                15: { 
+                    name: "Halloween Haunted House", 
+                    time: "7 PM", 
+                    location: "Main Hall", 
+                    details: "Experience our spooky haunted house!", 
+                    rsvp: { accepted: 35, declined: 3 } 
+                },
             },
             November: {
-                10: { name: "Veterans Appreciation Day", time: "11 AM", location: "Memorial Plaza", details: "Honoring those who served." },
-                22: { name: "Thanksgiving Potluck", time: "5 PM", location: "Dining Hall", details: "Bring a dish and share with everyone!" },
+                10: { 
+                    name: "Veterans Appreciation Day", 
+                    time: "11 AM", 
+                    location: "Memorial Plaza", 
+                    details: "Honoring those who served.", 
+                    rsvp: { accepted: 18, declined: 2 } 
+                },
+                22: { 
+                    name: "Thanksgiving Potluck", 
+                    time: "5 PM", 
+                    location: "Dining Hall", 
+                    details: "Bring a dish and share with everyone!", 
+                    rsvp: { accepted: 25, declined: 4 } 
+                },
             },
             December: {
-                2: { name: "Holiday Market", time: "10 AM", location: "Campus Center", details: "Shop local vendors for gifts." },
-                16: { name: "Finals Relaxation Day", time: "3 PM", location: "Quad", details: "Free snacks and relaxation activities!" },
+                2: { 
+                    name: "Holiday Market", 
+                    time: "10 AM", 
+                    location: "Campus Center", 
+                    details: "Shop local vendors for gifts.", 
+                    rsvp: { accepted: 30, declined: 6 } 
+                },
+                16: { 
+                    name: "Finals Relaxation Day", 
+                    time: "3 PM", 
+                    location: "Quad", 
+                    details: "Free snacks and relaxation activities!", 
+                    rsvp: { accepted: 22, declined: 1 } 
+                },
             }
         };
+
+
+    
 
 
         function renderCalendar() {
@@ -220,6 +319,7 @@
                 <div class="event" onclick="showEventDetails(${day})">
                     <h4>${event.name}</h4>
                     <p><strong>Date:</strong> ${monthName} ${day}, ${currentYear}</p>
+                    <p>RSVPs: ${event.rsvp.accepted} accepted, ${event.rsvp.declined} declined</p>
                 </div>
             `).join('');
 
@@ -247,6 +347,23 @@
                 document.getElementById('event-form').style.display = 'block';
             } else {
                 clearEventForm(monthName, day);
+            }
+        }
+
+        function rsvpEvent(eventName, isAccepted, button) {
+            const monthName = monthNames[currentMonth];
+            const eventEntries = Object.entries(events[monthName]);
+
+            for (const [day, event] of eventEntries) {
+                if (event.name === eventName) {
+                    if (isAccepted) {
+                        event.rsvp.accepted++;
+                    } else {
+                        event.rsvp.declined++;
+                    }
+                    alert(`You have ${isAccepted ? 'accepted' : 'declined'} the event: ${eventName}`);
+                    break;
+                }
             }
         }
 
@@ -327,6 +444,11 @@
                         <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
                     </div>
                 `;
+
+                // Display RSVP counts
+                const rsvpCounts = document.createElement('p');
+                rsvpCounts.innerHTML = `RSVPs: ${event.rsvp.accepted} accepted, ${event.rsvp.declined} declined`;
+                document.getElementById('event-form').appendChild(rsvpCounts);
             } else {
                 eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
             }

@@ -10,10 +10,10 @@
     <header>
         <h1>CampusNest</h1>
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Name: Sydney Boles</div>
+            <div id="user-name" class="dropdown-toggle">{{ username }}</div>
             <div class="dropdown-content" id="dropdown-menu">
-                <a href="index.html">Home</a>
-                <a href="login.html">Log Out</a>
+                <a href="home.html">Home</a>
+                <a href="{{ url_for('logout') }}">Log Out</a>
             </div>
         </div>
     </header>
@@ -23,7 +23,7 @@
         <form>
             <div class="input-group">
                 <label for="username">Username (required)</label>
-                <input type="text" id="username" value = "gusTHEeagle" required>
+                <input type="text" id="username" value = "gusTHEeagle" required disabled>
             </div>
             <div class="input-group">
                 <label for="last-name">Last Name (required)</label>
@@ -58,7 +58,7 @@
             </div>
             <div class="input-group">
                 <label for="email">Email (required)</label>
-                <input type="email" id="email" value="sydney.boles@example.com" required disabled>
+                <input type="email" id="email" value="GusEagle@example.com" required disabled>
             </div>
             <div class="input-group">
                 <label for="phone">Phone</label>
