@@ -19,7 +19,7 @@
         </div>
     
         <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">Gus the Eagle</div>
+            <div id="user-name" class="dropdown-toggle">{{ username }}</div>
             <div class="dropdown-content" id="dropdown-menu">
                 <a href="user-profile.html">User Profile</a>
                 <a href="login.html">Log Out</a>
@@ -252,10 +252,12 @@
                         <p><strong>Time:</strong> ${event.time}</p>
                         <p><strong>Location:</strong> ${event.location}</p>
                         <p><strong>Details:</strong> ${event.details}</p>
-                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', true, this)">Accept</button>
-                        <button class="rsvp-button" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
+                        <button class="rsvp-button" id="accept-${event.name}" onclick="rsvpEvent('${event.name}', true, this)">Accept</button>
+                        <button class="rsvp-button" id="decline-${event.name}" onclick="rsvpEvent('${event.name}', false, this)">Decline</button>
                     </div>
                 `;
+                // Load the RSVP state from local storage
+                loadRsvpState(event.name);
             } else {
                 eventList.innerHTML = `<h3>No events scheduled for ${monthName} ${day}, ${currentYear}.</h3>`;
             }
@@ -269,8 +271,23 @@
                 btn.classList.remove('active'); // Remove active class from all buttons
             });
 
-            button.classList.add('active'); // Add active class to the clicked button
+            // Add active class to the clicked button
+            button.classList.add('active');
+
+            // Save the RSVP status in local storage
+            localStorage.setItem(`rsvp-${eventName}`, isAccepted ? 'accepted' : 'declined');
         }
+
+        // Load the RSVP state from local storage
+        function loadRsvpState(eventName) {
+            const rsvpStatus = localStorage.getItem(`rsvp-${eventName}`);
+            if (rsvpStatus === 'accepted') {
+                document.getElementById(`accept-${eventName}`).classList.add('active');
+            } else if (rsvpStatus === 'declined') {
+                document.getElementById(`decline-${eventName}`).classList.add('active');
+            }
+        }
+
 
         function changeMonth(direction) {
             currentMonth += direction;
@@ -316,6 +333,12 @@
         };
 
         function loadUserTasks() {
+            // Load tasks from localStorage, or initialize if not present
+            const storedTasks = JSON.parse(localStorage.getItem('userTasks'));
+            if (storedTasks) {
+                tasks = storedTasks; // Use stored tasks if available
+            }
+            
             contentArea.innerHTML = `
                 <h2>Your Tasks</h2>
                 <ul id="taskList">
@@ -338,23 +361,28 @@
         function toggleTask(index, checkbox) {
             tasks[index].completed = checkbox.checked; // Update the completion state
             const taskElement = document.getElementById(`task-${index}`);
-            
+
             // Add or remove the 'completed' class based on the checkbox state
             if (checkbox.checked) {
                 taskElement.classList.add('completed'); // Mark as completed
             } else {
                 taskElement.classList.remove('completed'); // Mark as not completed
             }
+
+            // Save the updated tasks to localStorage
+            saveUserTasks();
         }
 
         function saveUserTasks() {
-            alert('Tasks saved! This feature currently does not store tasks permanently.');
+            localStorage.setItem('userTasks', JSON.stringify(tasks)); // Save tasks to localStorage
+            alert('Tasks saved!');
         }
 
         function isOverdue(dueDate) {
             const today = new Date();
             return new Date(dueDate) < today && !tasks.some(task => task.completed);
         }
+
 
         document.getElementById('files-tab').onclick = () => {
             contentArea.innerHTML = '<h2>Files</h2>';

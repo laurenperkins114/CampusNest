@@ -22,6 +22,7 @@ header {
 
 h1 {
     margin: 0;
+    font-size: 1.5em; /* Match size with dropdown */
 }
 
 .profile-container {
@@ -72,8 +73,11 @@ h1 {
 
 .dropdown-toggle {
     cursor: pointer;
-    padding: 5px 10px;
-    cursor: pointer; /* Change cursor to pointer */
+    padding: 10px;
+    font-size: 1.5em; /* Match font size with h1 */
+    font-weight: bold; /* Make text bold */
+    color: white; /* Text color */
+    transition: background 0.3s;
 }
 
 .dropdown-toggle:hover {
