@@ -44,5 +44,5 @@ CampusNest is an innovative platform designed as an alternative to traditional g
 ## Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: [Your choice of backend technology, e.g., Node.js, Express, or a serverless architecture]
-- **Database**: [Your choice of database, e.g., MongoDB, Firebase, etc.]
+- **Backend**: Flask
+- **Database**: SQL
