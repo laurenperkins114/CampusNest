@@ -13,16 +13,16 @@
         <div class="dropdown">
             <div class="dropdown-toggle" onclick="toggleClubMenu()">Club 1</div>
             <div class="dropdown-content" id="club-menu">
-                <a href="home.html">Club 1</a>
-                <a href="admin.html">Club 2</a>
+                <a href="{{ url_for('home_page') }}">Club 1</a>
+                <a href="{{ url_for('admin') }}">Club 2</a>
             </div>
         </div>
     
         <div class="dropdown">
             <div id="user-name" class="dropdown-toggle">{{ username }}</div>
             <div class="dropdown-content" id="dropdown-menu">
-                <a href="user-profile.html">User Profile</a>
-                <a href="login.html">Log Out</a>
+                <a href="{{ url_for('user_profile') }}">User Profile</a>
+                <a href="{{ url_for('login') }}">Log Out</a>
             </div>
         </div>
     </header>

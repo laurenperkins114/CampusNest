@@ -9,50 +9,54 @@
 <body>
     <div class="signup-form">
         <h1>Sign Up</h1>
-        <form id="signupForm">
+        <form id="signupForm" action="{{ url_for('signup') }}" method="POST">
+            <div class="form-group">
+                <label for="eagleId">Eagle ID</label>
+                <input type="text" id="eagleId" name="eagleId" placeholder="Enter your Eagle ID" required />
+            </div>
             <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder="e.g., Jane" required />
+                <input type="text" id="firstName" name="firstName" placeholder="e.g., Jane" required />
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder="e.g., Doe" required />
+                <input type="text" id="lastName" name="lastName" placeholder="e.g., Doe" required />
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="e.g., Jane_Doe" required />
+                <input type="text" id="username" name="username" placeholder="e.g., Jane_Doe" required />
             </div>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="e.g., yourname@example.com" required />
+                <input type="email" id="email" name="email" placeholder="e.g., yourname@example.com" required />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" required />
+                <input type="password" id="password" name="password" required />
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" required />
+                <input type="password" id="confirmPassword" name="confirmPassword" required />
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date of Birth</label>
-                <input type="date" id="dateOfBirth" required />
+                <input type="date" id="dateOfBirth" name="dateOfBirth" required />
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Phone Number</label>
-                <input type="tel" id="phoneNumber" placeholder="e.g., 777-777-7777" required />
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 777-777-7777" required />
             </div>
             <div class="form-group">
                 <label for="pronouns">Pronouns</label>
-                <input type="text" id="pronouns" placeholder="e.g., she/her" required />
+                <input type="text" id="pronouns" name="pronouns" placeholder="e.g., she/her" required />
             </div>
             <div class="form-group">
                 <label for="school">School/University</label>
-                <input type="text" id="school" placeholder="e.g., Georgia Southern University" required />
+                <input type="text" id="school" name="school" placeholder="e.g., Georgia Southern University" required />
             </div>
             <div class="form-group">
                 <label for="securityQuestion">Security Question</label>
-                <select id="securityQuestion" required>
+                <select id="securityQuestion" name="securityQuestion" required>
                     <option value="">Select a question</option>
                     <option>What was the name of your first pet?</option>
                     <option>Who was your favorite teacher?</option>
@@ -61,14 +65,18 @@
             </div>
             <div class="form-group">
                 <label for="securityAnswer">Answer</label>
-                <input type="text" id="securityAnswer" placeholder="Answer" required />
+                <input type="text" id="securityAnswer" name="securityAnswer" placeholder="Answer" required />
             </div>
             <div class="checkbox-container">
-                <input type="checkbox" id="agreeTerms" required />
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required />
                 <label for="agreeTerms">I agree to the <a href="#" id="termsLink">Terms and Conditions</a> and confirm that I am at least 13 years old.</label>
             </div>
             <button type="submit" class="submit-button">Create Account</button>
         </form>
+
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
     </div>
 
     <!-- Modal -->
@@ -83,8 +91,7 @@
     <script>
         // Handle form submission
         document.getElementById("signupForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            window.location.href = "home.html"; // Redirect to home.html
+            // Optionally add any client-side validation or processing here
         });
 
         // Get the modal
