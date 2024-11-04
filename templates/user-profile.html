@@ -12,7 +12,7 @@
         <div class="dropdown">
             <div id="user-name" class="dropdown-toggle">{{ username }}</div>
             <div class="dropdown-content" id="dropdown-menu">
-                <a href="home.html">Home</a>
+                <a href="{{ url_for('home_page') }}">Home</a>
                 <a href="{{ url_for('logout') }}">Log Out</a>
             </div>
         </div>
@@ -20,57 +20,57 @@
     
     <div class="profile-container">
         <h1>User Profile</h1>
-        <form>
+        <form action="{{ url_for('update_profile') }}" method="POST">
             <div class="input-group">
                 <label for="username">Username (required)</label>
-                <input type="text" id="username" value = "gusTHEeagle" required disabled>
+                <input type="text" id="username" name="username" value="{{ user.username }}" required disabled>
             </div>
             <div class="input-group">
                 <label for="last-name">Last Name (required)</label>
-                <input type="text" id="last-name" required>
+                <input type="text" id="last-name" name="last_name" value="{{ user.last_name }}" required disabled>
             </div>
             <div class="input-group">
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name">
+                <input type="text" id="first-name" name="first_name" value="{{ user.first_name }}" required disabled>
             </div>
             <div class="input-group">
                 <label for="preferred-name">Preferred First Name</label>
-                <input type="text" id="preferred-name">
+                <input type="text" id="preferred-name" name="preferred_name" value="{{ user.preferred_name }}">
             </div>
             <div class="input-group">
                 <label for="eagle-id">Eagle ID (required)</label>
-                <input type="text" id="eagle-id" value= "111111111" required disabled>
+                <input type="text" id="eagle-id" name="eagle_id" value="{{ user.eagle_id }}" required disabled>
             </div>
             <div class="input-group">
                 <label for="classification">Classification (required)</label>
-                <select id="classification" required>
-                    <option value="" disabled selected>Select your classification</option>
-                    <option value="freshman">Freshman</option>
-                    <option value="sophomore">Sophomore</option>
-                    <option value="junior">Junior</option>
-                    <option value="senior">Senior</option>
-                    <option value="higher-ed">Higher Ed</option>
+                <select id="classification" name="classification" required>
+                    <option value="" disabled>Select your classification</option>
+                    <option value="freshman" {% if user.classification == 'freshman' %}selected{% endif %}>Freshman</option>
+                    <option value="sophomore" {% if user.classification == 'sophomore' %}selected{% endif %}>Sophomore</option>
+                    <option value="junior" {% if user.classification == 'junior' %}selected{% endif %}>Junior</option>
+                    <option value="senior" {% if user.classification == 'senior' %}selected{% endif %}>Senior</option>
+                    <option value="higher-ed" {% if user.classification == 'higher-ed' %}selected{% endif %}>Higher Ed</option>
                 </select>
             </div>
             <div class="input-group">
                 <label for="major">Major (optional)</label>
-                <input type="text" id="major">
+                <input type="text" id="major" name="major" value="{{ user.major }}">
             </div>
             <div class="input-group">
                 <label for="email">Email (required)</label>
-                <input type="email" id="email" value="GusEagle@example.com" required disabled>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required disabled>
             </div>
             <div class="input-group">
                 <label for="phone">Phone</label>
-                <input type="tel" id="phone">
+                <input type="tel" id="phone" name="phone" value="{{ user.phone_number }}">
             </div>
             <div class="input-group">
                 <label for="preferred-contact">Preferred Contact Method (required)</label>
-                <select id="preferred-contact" required>
-                    <option value="email">Email</option>
-                    <option value="text">Text Message</option>
+                <select id="preferred-contact" name="preferred_contact" required>
+                    <option value="email" {% if user.preferred_contact == 'email' %}selected{% endif %}>Email</option>
+                    <option value="text" {% if user.preferred_contact == 'text' %}selected{% endif %}>Text Message</option>
                 </select>
-            </div>
+            </div>            
             <button type="submit" class="save-button">Save Changes</button>
         </form>
     </div>
