@@ -1,11 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #007bff; /* Blue background */
+    background-color: #102343; /* Blue background */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full height */
+}
+
+.logo {
+    width: 300px; /* Adjust the width of the logo */
 }
 
 .login-container {
@@ -40,7 +44,7 @@ input {
 }
 
 .login-button {
-    background-color: #007bff; /* Button color */
+    background-color: #102343; /* Button color */
     color: white; /* Text color */
     border: none; /* Remove border */
     padding: 10px;
@@ -51,7 +55,7 @@ input {
 }
 
 .login-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #081120; /* Darker blue on hover */
 }
 
 .links {
@@ -60,7 +64,7 @@ input {
 
 .links a {
     text-decoration: none; /* Remove underline */
-    color: #007bff; /* Link color */
+    color: #102343; /* Link color */
     display: block; /* Stack links */
     margin: 5px 0; /* Space between links */
 }
@@ -85,10 +89,11 @@ input {
 
 .loading-spinner {
     font-size: 24px;
-    color: #007bff;
+    color: #102343;
 }
 
 /* Blur effect for login container */
 .blur {
     filter: blur(2px);
+    color: #707787;
 }

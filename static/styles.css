@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #102343;
     display: flex;
     flex-direction: column;
 }
@@ -11,10 +11,10 @@ body {
 /* Header Styles */
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensure space between the left, middle, and right sections */
     align-items: center;
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: #102343;
     width: 100%;
     margin: 0;
     padding: 10px 20px;
@@ -22,9 +22,39 @@ header {
     border-radius: 5px 5px 0 0;
 }
 
+/* Left Section - Logo and Title */
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    flex: 1; /* Makes the left side flex and fill space */
+}
+
+/* Small Logo Styles */
+.small-logo {
+    width: 40px; /* Adjust size of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between the logo and title */
+    vertical-align: middle; /* Aligns the logo vertically with the text */
+}
+
+/* Middle Section - Clubs Dropdown */
+.clubs-container {
+    flex: 2; /* This makes the middle section grow to take up available space */
+    display: flex;
+    justify-content: center; /* Centers the clubs dropdown */
+}
+
+/* Right Section - User Name */
+.user-container {
+    display: flex;
+    justify-content: flex-end; /* Align the user section to the right */
+    flex: 1; /* Takes up remaining space on the right */
+}
+
 h1 {
     margin: 0;
     font-size: 1.5em; /* Match size with dropdown */
+    margin-left: 10px; /* Space between the logo and title */
 }
 
 header h1 a {
@@ -43,7 +73,7 @@ header h1 a {
     padding: 10px;
     font-size: 1.5em; /* Match font size with h1 */
     font-weight: bold; /* Make text bold */
-    color: white; /* Text color */
+    color: #102343; /* Text color */
     transition: background 0.3s;
 }
 
@@ -59,6 +89,7 @@ header h1 a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
+    font-weight: bold;
 }
 
 .dropdown-content a {
@@ -92,6 +123,8 @@ nav {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
     flex-shrink: 0; /* Prevent shrinking */
+    font-size: 20px;
+    font-weight: bold; /* Make text bold */
 }
 
 nav div {
@@ -121,45 +154,195 @@ nav div:hover {
 
 /* Month Heading Styles */
 .content-area h4 {
-    font-size: 1.2em; /* Smaller than title */
+    font-size: 1.2em;
     margin: 10px 0;
     cursor: pointer;
-    color: #007BFF; /* Color for interactivity */
+    color: #182948;
     transition: color 0.3s;
 }
 
 .content-area h4:hover {
-    color: #0056b3; /* Darker color on hover */
+    color: #0056b3;
 }
 
-/* Event Styling */
-.content-area div {
-    margin-top: 10px;
+/* Month Container */
+.month-container {
+    margin-bottom: 20px; /* Add some space between months */
 }
 
-.content-area div > div {
+/* Event Container Styles */
+.events-list {
+    margin-top: 10px; /* Space between month heading and events */
+}
+
+/* Event Box Styling */
+.event-box {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 15px;
     margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.content-area strong {
-    display: block;
+/* Hover effect for event box */
+.event-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Event Details Styling */
+.event-box strong {
     font-size: 1.2em;
+    font-weight: bold;
     margin-bottom: 5px;
 }
 
-.content-area a {
-    color: #007BFF;
+.event-box p {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333;
+    margin-top: 10px;
+}
+
+.event-box a {
+    color: #007bff;
     text-decoration: none;
     font-weight: bold;
 }
 
-.content-area a:hover {
+.event-box a:hover {
     text-decoration: underline;
 }
+
+/* Button Styling */
+.event-box button {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+}
+
+.event-box button:hover {
+    background-color: #218838;
+}
+
+/* Edit Textarea */
+.event-box textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Save Button */
+.event-box button + button {
+    margin-top: 10px;
+    background-color: #007bff;
+}
+
+.event-box button + button:hover {
+    background-color: #0056b3;
+}
+
+/* Task Container Styles */
+.tasks-list {
+    margin-top: 10px; /* Space between task list and heading */
+}
+
+/* Task Box Styling */
+.task-box {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for task box */
+.task-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Task Checkbox Section */
+.task-checkbox {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Task Title and Details */
+.task-details {
+    display: inline-block;
+    max-width: 70%;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333;
+}
+
+.task-details strong {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.task-details p {
+    margin-top: 10px;
+}
+
+/* Task Link Styling */
+.task-details a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.task-details a:hover {
+    text-decoration: underline;
+}
+
+/* Task Deadline */
+.task-deadline {
+    font-size: 1em;
+    color: #333;
+}
+
+.task-deadline.overdue {
+    color: red; /* Red for overdue tasks */
+}
+
+/* Completed Task Styling */
+.completed {
+    text-decoration: line-through; /* Strikethrough for completed tasks */
+    color: gray; /* Gray color for completed tasks */
+}
+
+/* Save Tasks Button Styling */
+.save-tasks-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.save-tasks-button:hover {
+    background-color: #218838;
+}
+
 
 /* Directory Table Styles */
 .directory-table {
@@ -189,7 +372,7 @@ nav div:hover {
 
 /* Button Styles */
 .export-button {
-    background-color: #4caf50;
+    background-color: #24314C ;
     color: white;
     border: none;
     padding: 8px 12px; /* Larger padding */
@@ -199,24 +382,32 @@ nav div:hover {
 }
 
 .export-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #24314C ; /* Darker blue on hover */
     transform: scale(1.05); /* Slightly scale up on hover */
 }
 
 /* Event Styles */
 .event {
-    background-color: #f0f0f0;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
     padding: 10px;
     margin: 5px 0;
+    border-radius: 5px; /* Add rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .highlight {
-    background-color: #ffeb3b;
+    background-color: #b58c34;
     font-weight: bold;
 }
 
 .active {
-    background-color: #4caf50;
+    background-color: #24314C ;
     color: white;
 }
 
@@ -293,7 +484,7 @@ nav div:hover {
 
 .nav-buttons button {
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: #102343;
     color: white;
     border: none;
     border-radius: 5px;
@@ -318,29 +509,25 @@ nav div:hover {
     font-size: 16px;
 }
 
-ul {
-    list-style-type: none; /* Removes default bullet points */
-    padding: 0; /* Removes padding around the list */
+/* Style for month headers */
+h4 {
+    font-size: 1.5em; /* Increase font size for month headers */
+    margin: 15px 0; /* Space above and below month headers */
 }
 
-li {
-    background: white; /* Background color for each task */
-    margin: 5px 0; /* Space between tasks */
-    padding: 10px; /* Space inside each task */
-    border-radius: 5px; /* Rounded corners for each task */
-    display: flex; /* Aligns items in a row */
-    align-items: flex-start; /* Aligns checkbox with the text at the start */
+/* Style for Save All Tasks button */
+#save-tasks-btn {
+    font-weight: bold;          /* Makes the font bold */
+    color: white;               /* Sets the font color to white */
+    background-color: #102343;  /* Sets the background color to #102343 */
+    border: none;               /* Removes the default border */
+    padding: 10px 20px;         /* Adds padding inside the button */
+    font-size: 12px;            /* Sets a readable font size */
+    border-radius: 5px;         /* Slightly rounds the corners */
+    cursor: pointer;           /* Changes cursor to a pointer on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
 
-input[type="checkbox"] {
-    margin-right: 10px; /* Space between checkbox and task text */
-}
-
-.overdue {
-    color: red; /* Red color for overdue tasks */
-}
-
-.completed {
-    text-decoration: line-through; /* Strikethrough for completed tasks */
-    color: gray; /* Gray color for completed tasks */
+#save-tasks-btn:hover {
+    background-color: #081732; /* Darkens the button on hover */
 }

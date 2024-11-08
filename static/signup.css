@@ -2,12 +2,16 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #007bff; /* Blue background */
+    background-color: #102343; /* Blue background */
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Change to flex-start */
     height: 100vh; /* Full height */
     padding-top: 20px; /* Add padding to the top */
+}
+
+.logo {
+    width: 300px; /* Adjust the width of the logo */
 }
 
 /* Container for Signup Form */
@@ -46,7 +50,7 @@ input {
 
 /* Button Styling */
 .submit-button {
-    background-color: #007bff; /* Button color */
+    background-color: #102343; /* Button color */
     color: white; /* Text color */
     border: none; /* Remove border */
     padding: 10px;
@@ -67,7 +71,7 @@ input {
 
 .links a {
     text-decoration: none; /* Remove underline */
-    color: #007bff; /* Link color */
+    color: #102343; /* Link color */
     display: block; /* Stack links */
     margin: 5px 0; /* Space between links */
 }
@@ -92,7 +96,7 @@ input {
 
 .loading-spinner {
     font-size: 24px;
-    color: #007bff;
+    color: #102343;
 }
 
 /* Blur effect for signup container */
