@@ -8,12 +8,21 @@
 </head>
 <body>
     <header>
-        <h1>CampusNest</h1>
-        <div class="dropdown">
-            <div id="user-name" class="dropdown-toggle">{{ username }}</div>
-            <div class="dropdown-content" id="dropdown-menu">
-                <a href="{{ url_for('home_page') }}">Home</a>
-                <a href="{{ url_for('logout') }}">Log Out</a>
+        <!-- Left section (Logo and Title) -->
+        <div class="logo-title-container">
+            <!-- Add logo image here -->
+            <img src="{{ url_for('static', filename='images/SmallLogoBlue.png') }}" alt="CampusNest Logo" class="small-logo">
+            <h1><a href="#" id="home-link">CampusNest</a></h1>
+        </div>
+        
+        <!-- Right section (User name) -->
+        <div class="user-container">
+            <div class="dropdown">
+                <div id="user-name" class="dropdown-toggle">{{ session.get('username', 'Guest') }}</div>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="{{ url_for('home_page') }}">Home</a>
+                    <a href="{{ url_for('login') }}">Log Out</a>
+                </div>
             </div>
         </div>
     </header>

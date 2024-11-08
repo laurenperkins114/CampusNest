@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="signup-form">
+        <img src="{{ url_for('static', filename='images/BigLogoBlue.png') }}" alt="CampusNest Logo" class="logo">
+
         <h1>Sign Up</h1>
         <form id="signupForm" action="{{ url_for('signup') }}" method="POST">
             <div class="form-group">

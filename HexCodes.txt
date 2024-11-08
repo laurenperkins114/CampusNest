@@ -1,10 +1,14 @@
 Hex Codes
-939BAC
-8991A3
-707787
-B6Ab93
-F0F0F3
-182948
-102343
-E1E1E6
-24314C
+#939BAC  // Light Grayish Blue
+#8991A3  // Muted Steel Blue
+#707787  // Dusty Blue
+#B6Ab93  // Light Olive Green
+#F0F0F3  // Very Light Gray (Almost White)
+#182948  // Dark Navy Blue
+#102343  // Deep Blue (Navy)
+#E1E1E6  // Very Light Gray with a Hint of Blue
+#24314C  // Charcoal Blue
+
+Backgroun Replace #007bff with #102343
+Hover #0056b3 with #081120
+
