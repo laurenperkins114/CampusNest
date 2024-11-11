@@ -297,8 +297,6 @@
             }
         }
 
-
-
         function changeMonth(direction) {
             currentMonth += direction;
             if (currentMonth < 0) {
@@ -351,7 +349,7 @@
 
             contentArea.innerHTML = `
                 <h2>Your Tasks</h2>
-                <button id="save-tasks-btn" onclick="saveUserTasks()">Save Tasks</button>
+                <button id="save-tasks-btn" onclick="saveUserTasks(true)">Save Tasks</button>
                 <div id="taskList">
                     ${tasks.map((task, index) => `
                         <div id="task-${index}" class="task-item ${task.completed ? 'completed' : ''}">
@@ -375,6 +373,7 @@
         function toggleTask(index, checkbox) {
             tasks[index].completed = checkbox.checked; // Update the completion state
             const taskElement = document.getElementById(`task-${index}`);
+            console.log(`Task ${index} is ${checkbox.checked ? 'completed' : 'not completed'}`);
 
             // Add or remove the 'completed' class based on the checkbox state
             if (checkbox.checked) {
@@ -384,12 +383,15 @@
             }
 
             // Save the updated tasks to localStorage
-            saveUserTasks();
+            // Save tasks without showing an alert
+            saveUserTasks(false);
         }
 
-        function saveUserTasks() {
+        function saveUserTasks(showAlert) {
             localStorage.setItem('userTasks', JSON.stringify(tasks)); // Save tasks to localStorage
-            alert('Tasks saved!');
+            if (showAlert) {
+                alert('Tasks saved!');
+            }
         }
 
         function isOverdue(dueDate) {
@@ -433,7 +435,6 @@
                         <strong>${event.name}</strong> on ${day} at ${event.time}, Location: ${event.location}
                         <p>${event.details}</p>
                         <a href="blob:http://127.0.0.1:5000/xyz" download="${event.name.replace(/\s+/g, '_')}_${day}.txt">Download Info</a>
-                        <button onclick="editEvent('${day}', '${event.name}', '${event.time}', '${event.location}', '${event.details}')">Edit</button>
                         <div id="edit-${day}-${event.name.replace(/\s+/g, '-')}" style="display:none;">
                             <textarea rows="4" cols="50">${event.details}</textarea>
                             <button onclick="saveEdit('${day}', '${event.name}', this.previousElementSibling.value)">Save</button>

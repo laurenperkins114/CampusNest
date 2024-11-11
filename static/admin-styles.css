@@ -241,6 +241,18 @@ nav div:hover {
     font-size: 1em;
 }
 
+.edit-button {
+    background-color: #24314C ;
+    color: white;
+    border-radius: 5px; /* Softer button corners */
+}
+
+.delete-button {
+    background-color: #24314C ;
+    color: white;
+    border-radius: 5px; /* Softer button corners */
+}
+
 /* Save Button */
 .event-box button + button {
     margin-top: 10px;
@@ -393,7 +405,7 @@ nav div:hover {
 
 /* Style for month headers */
 h4 {
-    font-size: 1.5em; /* Increase font size for month headers */
+    font-size: 1.2em; /* Increase font size for month headers */
     margin: 15px 0; /* Space above and below month headers */
 }
 

@@ -154,7 +154,7 @@ nav div:hover {
 
 /* Month Heading Styles */
 .content-area h4 {
-    font-size: 1.2em;
+    font-size: 1em;
     margin: 10px 0;
     cursor: pointer;
     color: #182948;
@@ -321,9 +321,9 @@ nav div:hover {
 }
 
 /* Completed Task Styling */
-.completed {
-    text-decoration: line-through; /* Strikethrough for completed tasks */
-    color: gray; /* Gray color for completed tasks */
+.task-item.completed .task-details {
+    text-decoration: line-through !important;
+    color: gray !important;
 }
 
 /* Save Tasks Button Styling */
@@ -511,7 +511,7 @@ nav div:hover {
 
 /* Style for month headers */
 h4 {
-    font-size: 1.5em; /* Increase font size for month headers */
+    font-size: 1.2em; /* Increase font size for month headers */
     margin: 15px 0; /* Space above and below month headers */
 }
 
